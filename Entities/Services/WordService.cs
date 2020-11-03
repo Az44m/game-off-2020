@@ -8,10 +8,10 @@ using NReco.Csv;
 
 namespace GameOff2020.Entities.Services
 {
-    public class WordService
+    public class WordService : Node
     {
-        private readonly Assembly _executingAssembly;
-        private readonly Random _random;
+        private Assembly _executingAssembly;
+        private readonly Random _random = new Random();
         private readonly List<string> _words = new List<string>();
 
         private readonly Dictionary<char, int> _letters = new Dictionary<char, int>
@@ -44,10 +44,9 @@ namespace GameOff2020.Entities.Services
             {'Z', 10}
         };
 
-        public WordService()
+        public override void _Ready()
         {
             _executingAssembly = Assembly.GetExecutingAssembly();
-            _random = new Random();
             ReadWords();
         }
 
@@ -61,12 +60,7 @@ namespace GameOff2020.Entities.Services
             {
                 var word = csvReader[0];
                 if (!word.Contains("'"))
-                {
-                    if (!_words.Contains(word))
-                        _words.Add(word.ToUpper());
-                    else
-                        GD.Print($"Vótmá: {word}");
-                }
+                    _words.Add(word.ToUpper());
             }
         }
 
@@ -74,9 +68,7 @@ namespace GameOff2020.Entities.Services
 
         public bool IsValidWord(string word) => _words.Contains(word.ToUpper());
 
-        public char[] GetRandomLetters(int amount)
-        {
-            return _letters.Keys.OrderBy(x => _random.Next()).Take(amount).ToArray();
-        }
+        //TODO Smarter letter generation
+        public char[] GetRandomLetters(int amount) => _letters.Keys.OrderBy(x => _random.Next()).Take(amount).ToArray();
     }
 }

@@ -44,6 +44,8 @@ namespace GameOff2020.Entities.Services
             {'Z', 10}
         };
 
+        private char[] _currentLetters;
+
         public override void _Ready()
         {
             _executingAssembly = Assembly.GetExecutingAssembly();
@@ -66,9 +68,13 @@ namespace GameOff2020.Entities.Services
 
         public int CalculateScore(string word) => word.ToUpper().Sum(c => _letters[c]);
 
-        public bool IsValidWord(string word) => _words.Contains(word.ToUpper());
+        public bool IsValidWord(string word) => _words.Contains(word.ToUpper()) && word.All(_currentLetters.Contains);
 
         //TODO Smarter letter generation
-        public char[] GetRandomLetters(int amount) => _letters.Keys.OrderBy(x => _random.Next()).Take(amount).ToArray();
+        public char[] GetRandomLetters(int amount)
+        {
+            _currentLetters = _letters.Keys.OrderBy(x => _random.Next()).Take(amount).ToArray();
+            return _currentLetters;
+        }
     }
 }

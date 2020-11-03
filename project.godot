@@ -22,3 +22,4 @@ config/icon="res://icon.png"
 [autoload]
 
 WordService="*res://Entities/Services/WordService.tscn"
+SignalService="*res://Entities/Services/SignalService.tscn"

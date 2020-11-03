@@ -5,10 +5,17 @@ namespace GameOff2020.Entities
 {
     public class Letters : Label
     {
+        private WordService _wordService;
+
         public override void _Ready()
         {
-            var wordService = GetNode<WordService>("/root/WordService");
-            Text = string.Join(" ", wordService.GetRandomLetters(10));
+            _wordService = GetNode<WordService>("/root/WordService");
+            Text = string.Join(" ", _wordService.GetRandomLetters(10));
+
+            var signalService = GetNode<SignalService>("/root/SignalService");
+            signalService.Connect(nameof(SignalService.RequestNewLetters), this, nameof(OnNewLettersRequest));
         }
+
+        private void OnNewLettersRequest() => Text = string.Join(" ", _wordService.GetRandomLetters(10));
     }
 }

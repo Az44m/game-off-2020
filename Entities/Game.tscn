@@ -1,6 +1,7 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Entities/Game.cs" type="Script" id=1]
+[ext_resource path="res://Entities/SpaceWord.cs" type="Script" id=2]
 [ext_resource path="res://Entities/WordInputField.cs" type="Script" id=3]
 [ext_resource path="res://Entities/Letters.cs" type="Script" id=4]
 
@@ -16,6 +17,19 @@ margin_bottom = -166.5
 align = 1
 valign = 1
 script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SpaceWord" type="Label" parent="."]
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_top = 166.0
+margin_bottom = 197.0
+align = 1
+valign = 1
+script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }

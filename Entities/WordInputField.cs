@@ -48,14 +48,21 @@ namespace GameOff2020.Entities
         {
             if (newString.Length > 1)
             {
-                if (_wordService.IsValidWord(newString))
+                if (_wordService.IsValidSpaceWord(newString))
                 {
-                    GD.Print("Valid word");
                     Text = string.Empty;
                     _oldText = string.Empty;
+                    _signalService.EmitSignal(nameof(SignalService.SpaceWordFound));
+                }
+                else if (_wordService.IsValidWord(newString))
+                {
+                    Text = string.Empty;
+                    _oldText = string.Empty;
+                    _signalService.EmitSignal(nameof(SignalService.LetterWordFound));
                 }
                 else
                 {
+                    // TODO Visual feedback eg text field shaking
                     GD.Print("NOT valid word");
                 }
             }

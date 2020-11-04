@@ -76,5 +76,20 @@ namespace GameOff2020.Entities.Services
             _currentLetters = _letters.Keys.OrderBy(x => _random.Next()).Take(amount).ToArray();
             return _currentLetters;
         }
+
+        private readonly string[] _spaceWords =
+        {
+            "SPACE", "EARTH", "MARS", "MOON", "SOLAR", "JUPITER", "NEPTUNE", "MERCURY", "SATURN", "PLUTO", "VENUS", "URANUS", "PLANET", "ASTEROID",
+            "ASTRONAUT", "ASTRONAUTS", "ASTRONOMER", "ASTRONOMICAL", "ASTRONOMY", "CONSTELLATION", "COSMOS", "COSMIC", "CRATER", "DUST", "EQUINOX",
+            "ECLIPSE", "GALAXY", "LUNAR", "METEOR", "METEORITE", "METEOROID", "GRAVITY", "INERTIA", "MAGNITUDE", "MASS", "NEBULA", "ORBIT", "ROCKET",
+            "EXPLORATION", "SOLSTICE", "STAR", "UMBRA", "SKY", "SATELLITE", "PENUMBRA", "PHASE", "OBSERVATORY", "UNIVERSE", "SUN", "STARLIGHT",
+            "TELESCOPE", "INTERSTELLAR", "SPACECRAFT", "COMET", "AEROSPACE", "SPACEMAN", "SPACESHIP", "INTERPLANETARY", "GALACTIC", "HELIOSPHERE",
+            "MICROGRAVITY", "GRAVITATION", "ATMOSPHERE", "MOONSHINE", "SPACEFLIGHT", "SPUTNIK", "GAGARIN", "NASA", "APOLLO", "SOYUZ", "ORIENTATION",
+            "ARMSTRONG", "KENNEDY", "ARTEMIS", "MOONBEAM"
+        };
+
+        public string GetRandomSpaceWord() => _spaceWords[_random.Next(0, _spaceWords.Length)];
+
+        public bool IsValidSpaceWord(string word) => _spaceWords.Contains(word.ToUpper());
     }
 }

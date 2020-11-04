@@ -1,9 +1,10 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Entities/Game.cs" type="Script" id=1]
 [ext_resource path="res://Entities/SpaceWord.cs" type="Script" id=2]
 [ext_resource path="res://Entities/WordInputField.cs" type="Script" id=3]
 [ext_resource path="res://Entities/Letters.cs" type="Script" id=4]
+[ext_resource path="res://Entities/ProgressBar.cs" type="Script" id=5]
 
 [node name="Game" type="Node"]
 script = ExtResource( 1 )
@@ -49,3 +50,29 @@ script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="PlayerProgressBar" type="ProgressBar" parent="."]
+margin_right = 300.0
+margin_bottom = 31.0
+step = 1.0
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Timer" type="Timer" parent="PlayerProgressBar"]
+autostart = true
+
+[node name="AIProgressBar" type="ProgressBar" parent="."]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -300.0
+margin_bottom = 31.0
+step = 1.0
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Timer" type="Timer" parent="AIProgressBar"]
+autostart = true

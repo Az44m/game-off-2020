@@ -13,8 +13,11 @@ namespace GameOff2020.Entities.ObjectiveProgressBars
             _wordService = GetNode<WordService>("/root/WordService");
             var signalService = GetNode<SignalService>("/root/SignalService");
             signalService.Connect(nameof(SignalService.AISpyEntered), this, nameof(OnAISpyEntered));
+            signalService.Connect(nameof(SignalService.RequestNewLetters), this, nameof(OnNewLettersRequested));
         }
 
         private void OnAISpyEntered(string word) => Value -= _wordService.CalculateScore(word);
+
+        private void OnNewLettersRequested() => Value -= 3;
     }
 }

@@ -13,11 +13,11 @@ namespace GameOff2020.Entities
             Text = string.Join(" ", _wordService.GetRandomLetters(10));
 
             var signalService = GetNode<SignalService>("/root/SignalService");
-            signalService.Connect(nameof(SignalService.RequestNewLetters), this, nameof(OnNewLettersRequest));
+            signalService.Connect(nameof(SignalService.RequestNewLetters), this, nameof(OnNewLettersRequested));
             signalService.Connect(nameof(SignalService.LetterWordFound), this, nameof(OnLetterWordFound));
         }
 
-        private void OnNewLettersRequest() => UpdateLetters();
+        private void OnNewLettersRequested() => UpdateLetters();
         private void OnLetterWordFound() => UpdateLetters();
         private void UpdateLetters() => Text = string.Join(" ", _wordService.GetRandomLetters(10));
     }

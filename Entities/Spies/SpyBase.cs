@@ -3,7 +3,7 @@ using Godot;
 
 namespace GameOff2020.Entities.Spies
 {
-    public abstract class SpyBase : Sprite
+    public abstract class SpyBase : Area2D
     {
         private int _movementSpeed = 20;
         private Label _wordLabel;
@@ -18,7 +18,6 @@ namespace GameOff2020.Entities.Spies
                 _word = value;
                 if (IsInstanceValid(_wordLabel))
                     _wordLabel.Text = _word;
-                GD.Print($"{_word} -> {WordService.CalculateScore(_word)}");
             }
         }
 

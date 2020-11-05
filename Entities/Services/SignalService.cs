@@ -12,5 +12,11 @@ namespace GameOff2020.Entities.Services
 
         [Signal]
         public delegate void LetterWordFound();
+
+        [Signal]
+        public delegate void AISpyEntered(string word);
+
+        [Signal]
+        public delegate void PlayerSpyEntered(string word);
     }
 }

@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://Entities/Spies/AISpy.cs" type="Script" id=1]
+[ext_resource path="res://icon.png" type="Texture" id=2]
+
+[node name="AISpy" type="Sprite"]
+texture = ExtResource( 2 )
+script = ExtResource( 1 )
+
+[node name="Word" type="Label" parent="."]
+margin_left = -89.0
+margin_top = -49.0
+margin_right = 92.0
+margin_bottom = -35.0
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}

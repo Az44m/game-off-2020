@@ -1,8 +1,8 @@
 using Godot;
 
-namespace GameOff2020.Entities
+namespace GameOff2020.Entities.ObjectiveProgressBars
 {
-    public class ProgressBar : Godot.ProgressBar
+    public abstract class ObjectiveProgressBarBase : ProgressBar
     {
         public override void _Ready()
         {
@@ -10,6 +10,6 @@ namespace GameOff2020.Entities
             timer.Connect("timeout", this, nameof(DoProgress));
         }
 
-        private void DoProgress() => Value++;
+        protected virtual void DoProgress() => Value++;
     }
 }

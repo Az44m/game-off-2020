@@ -17,6 +17,7 @@ namespace GameOff2020.Entities
             Text = _wordService.GetRandomSpaceWord();
         }
 
-        private void OnSpaceWordFound() => Text = _wordService.GetRandomSpaceWord();
+        // ReSharper disable once UnusedParameter.Local
+        private void OnSpaceWordFound(string word) => Text = _wordService.GetRandomSpaceWord();
     }
 }

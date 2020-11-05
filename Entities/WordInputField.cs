@@ -9,11 +9,13 @@ namespace GameOff2020.Entities
         private string _oldText = string.Empty;
         private SignalService _signalService;
         private WordService _wordService;
+        private SpawnService _spawnService;
 
         public override void _Ready()
         {
             _signalService = GetNode<SignalService>("/root/SignalService");
             _wordService = GetNode<WordService>("/root/WordService");
+            _spawnService = GetNode<SpawnService>("/root/SpawnService");
 
             Connect("text_changed", this, nameof(OnTextChanged));
             Connect("text_entered", this, nameof(OnTextEntered));
@@ -52,13 +54,14 @@ namespace GameOff2020.Entities
                 {
                     Text = string.Empty;
                     _oldText = string.Empty;
-                    _signalService.EmitSignal(nameof(SignalService.SpaceWordFound));
+                    _signalService.EmitSignal(nameof(SignalService.SpaceWordFound), newString.ToUpper());
                 }
                 else if (_wordService.IsValidWord(newString))
                 {
                     Text = string.Empty;
                     _oldText = string.Empty;
                     _signalService.EmitSignal(nameof(SignalService.LetterWordFound));
+                    AddChild(_spawnService.SpawnPlayerSpy(newString.ToUpper()));
                 }
                 else
                 {

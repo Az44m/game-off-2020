@@ -1,4 +1,5 @@
 using GameOff2020.Entities.Services;
+using Godot;
 
 namespace GameOff2020.Entities.ObjectiveProgressBars
 {
@@ -6,22 +7,21 @@ namespace GameOff2020.Entities.ObjectiveProgressBars
     {
         private SpawnService _spawnService;
         private WordService _wordService;
+        private int _timeoutCounter;
 
         public override void _Ready()
         {
             base._Ready();
             _spawnService = GetNode<SpawnService>("/root/SpawnService");
             _wordService = GetNode<WordService>("/root/WordService");
-            var signalService = GetNode<SignalService>("/root/SignalService");
-            signalService.Connect(nameof(SignalService.PlayerSpyEntered), this, nameof(OnPlayerSpyEntered));
+            SignalService.Connect(nameof(SignalService.PlayerSpyEntered), this, nameof(OnPlayerSpyEntered));
         }
 
-        protected override void DoProgress()
+        protected override void Progress()
         {
-            base.DoProgress();
-            // TODO Spawn Spies with Timer as Value can be manipulated in other ways besides timer which causes uneven spawning
-            // ReSharper disable once CompareOfFloatsByEqualityOperator
-            if (Value == 1 || Value % 6 == 0)
+            base.Progress();
+            _timeoutCounter++;
+            if (_timeoutCounter % 7 == 0)
                 AddChild(_spawnService.SpawnAISpy());
         }
 

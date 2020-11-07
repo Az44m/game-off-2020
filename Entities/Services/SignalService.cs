@@ -18,5 +18,14 @@ namespace GameOff2020.Entities.Services
 
         [Signal]
         public delegate void PlayerSpyEntered(string word);
+
+        [Signal]
+        public delegate void GameStarted();
+
+        [Signal]
+        public delegate void GameOver();
+
+        [Signal]
+        public delegate void GamePaused(bool isPaused);
     }
 }

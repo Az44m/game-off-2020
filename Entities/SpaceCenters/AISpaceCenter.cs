@@ -8,6 +8,7 @@ namespace GameOff2020.Entities.SpaceCenters
     public class AISpaceCenter : SpaceCenterBase<PlayerSpy>
     {
         private Random _random;
+        private Timer _exposureTimer;
         protected override string EnterSignalName { get; } = nameof(SignalService.PlayerSpyEntered);
 
         public override void _Ready()
@@ -16,10 +17,10 @@ namespace GameOff2020.Entities.SpaceCenters
 
             _random = new Random();
 
-            var timer = GetNode<Timer>("Timer");
-            timer.Connect("timeout", this, nameof(TryToExposePlayerSpy));
-            timer.Start();
-            TryToExposePlayerSpy();
+            _exposureTimer = GetNode<Timer>("Timer");
+            _exposureTimer.Connect("timeout", this, nameof(TryToExposePlayerSpy));
+            var signalService = GetNode<SignalService>("/root/SignalService");
+            signalService.Connect(nameof(SignalService.GameStarted), this, nameof(OnGameStarted));
         }
 
         private void TryToExposePlayerSpy()
@@ -30,7 +31,6 @@ namespace GameOff2020.Entities.SpaceCenters
 
             var selectedSpy = playerSpies.Count == 1 ? playerSpies[0] : playerSpies[_random.Next(0, playerSpies.Count)];
             var exposureChance = CalculateExposureChance(selectedSpy.Word.Length);
-
             if (_random.NextDouble() < exposureChance)
                 SpawnService.Destroy(selectedSpy);
         }
@@ -51,5 +51,7 @@ namespace GameOff2020.Entities.SpaceCenters
 
             return 0.0034f; // 5% overall
         }
+
+        private void OnGameStarted() => _exposureTimer.Start(0);
     }
 }

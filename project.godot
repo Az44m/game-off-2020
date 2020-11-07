@@ -16,7 +16,7 @@ _global_script_class_icons={
 [application]
 
 config/name="GameOff2020"
-run/main_scene="res://Entities/Game.tscn"
+run/main_scene="res://Entities/Main.tscn"
 config/icon="res://icon.png"
 
 [autoload]
@@ -24,3 +24,4 @@ config/icon="res://icon.png"
 WordService="*res://Entities/Services/WordService.tscn"
 SignalService="*res://Entities/Services/SignalService.tscn"
 SpawnService="*res://Entities/Services/SpawnService.tscn"
+GameStateService="*res://Entities/Services/GameStateService.tscn"

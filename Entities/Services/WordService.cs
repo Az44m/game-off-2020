@@ -20,12 +20,46 @@ namespace GameOff2020.Entities.Services
             {'E', 1},
             {'I', 1},
             {'O', 1},
+            {'U', 1},
             {'N', 1},
             {'R', 1},
             {'T', 1},
             {'L', 1},
             {'S', 1},
-            {'U', 1},
+            {'D', 2},
+            {'G', 2},
+            {'B', 3},
+            {'C', 3},
+            {'M', 3},
+            {'P', 3},
+            {'F', 4},
+            {'H', 4},
+            {'W', 4},
+            {'V', 4},
+            {'Y', 4},
+            {'K', 5},
+            {'J', 8},
+            {'X', 8},
+            {'Q', 10},
+            {'Z', 10}
+        };
+
+        private readonly Dictionary<char, int> _vowels = new Dictionary<char, int>
+        {
+            {'A', 1},
+            {'E', 1},
+            {'I', 1},
+            {'O', 1},
+            {'U', 1}
+        };
+
+        private readonly Dictionary<char, int> _consonants = new Dictionary<char, int>
+        {
+            {'N', 1},
+            {'R', 1},
+            {'T', 1},
+            {'L', 1},
+            {'S', 1},
             {'D', 2},
             {'G', 2},
             {'B', 3},
@@ -70,10 +104,10 @@ namespace GameOff2020.Entities.Services
 
         public bool IsValidWord(string word) => _words.Contains(word.ToUpper()) && word.All(_currentLetters.Contains);
 
-        //TODO Smarter letter generation
         public char[] GetRandomLetters(int amount)
         {
-            _currentLetters = _letters.Keys.OrderBy(x => _random.Next()).Take(amount).ToArray();
+            var consonants = _consonants.Keys.OrderBy(x => _random.Next()).Take(amount-5).ToArray();
+            _currentLetters = consonants.Concat(_vowels.Keys).OrderBy(x => _random.Next()).ToArray();
             return _currentLetters;
         }
 

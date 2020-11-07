@@ -23,7 +23,7 @@ namespace GameOff2020.Entities.Services
         public delegate void GameStarted();
 
         [Signal]
-        public delegate void GameOver();
+        public delegate void GameOver(bool isWin);
 
         [Signal]
         public delegate void GamePaused(bool isPaused);

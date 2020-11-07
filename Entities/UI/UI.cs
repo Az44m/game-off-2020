@@ -14,7 +14,9 @@ namespace GameOff2020.Entities.UI
         }
 
         private void OnGameStarted() => Visible = false;
-        private void OnGameOver() => Visible = true;
+
+        // ReSharper disable once UnusedParameter.Local
+        private void OnGameOver(bool isWin) => Visible = true;
         private void OnGamePaused(bool isPaused) => Visible = isPaused;
     }
 }

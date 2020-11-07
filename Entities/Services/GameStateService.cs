@@ -40,10 +40,11 @@ namespace GameOff2020.Entities.Services
             _signalService.EmitSignal(nameof(SignalService.GamePaused), GameState == GameState.Paused);
         }
 
-        public void GameOver()
+        public void GameOver(bool isWin)
         {
             GameState = GameState.GameOver;
-            _signalService.EmitSignal(nameof(SignalService.GameOver));
+            GetTree().Paused = true;
+            _signalService.EmitSignal(nameof(SignalService.GameOver), isWin);
         }
     }
 }

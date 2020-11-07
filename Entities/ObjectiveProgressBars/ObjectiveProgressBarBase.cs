@@ -7,9 +7,11 @@ namespace GameOff2020.Entities.ObjectiveProgressBars
     {
         private Timer _progressTimer;
         protected SignalService SignalService;
+        protected GameStateService GameStateService;
 
         public override void _Ready()
         {
+            GameStateService = GetNode<GameStateService>("/root/GameStateService");
             SignalService = GetNode<SignalService>("/root/SignalService");
 
             _progressTimer = GetNode<Timer>("Timer");

@@ -20,6 +20,13 @@ namespace GameOff2020.Entities.ObjectiveProgressBars
         protected override void Progress()
         {
             base.Progress();
+
+            if (Value >= 100)
+            {
+                GameStateService.GameOver(false);
+                return;
+            }
+
             _timeoutCounter++;
             if (_timeoutCounter % 7 == 0)
                 AddChild(_spawnService.SpawnAISpy());

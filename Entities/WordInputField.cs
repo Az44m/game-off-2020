@@ -24,6 +24,7 @@ namespace GameOff2020.Entities
             _regex.Compile(@"^[a-zA-Z]*$");
 
             _signalService.Connect(nameof(SignalService.GameStarted), this, nameof(OnGameStarted));
+            _signalService.Connect(nameof(SignalService.GamePaused), this, nameof(OnGamePaused));
         }
 
         private void OnTextChanged(string newString)
@@ -79,6 +80,12 @@ namespace GameOff2020.Entities
             _oldText = string.Empty;
 
             GrabFocus();
+        }
+
+        private void OnGamePaused(bool isPaused)
+        {
+            Text = isPaused ? string.Empty : _oldText;
+            CaretPosition = Text.Length;
         }
     }
 }

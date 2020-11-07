@@ -30,6 +30,9 @@ namespace GameOff2020.Entities.Spies
             WordService = GetNode<WordService>("/root/WordService");
             _wordLabel = GetNode<Label>("Word");
             _wordLabel.Text = Word;
+
+            var signalService = GetNode<SignalService>("/root/SignalService");
+            signalService.Connect(nameof(SignalService.GamePaused), this, nameof(OnGamePaused));
         }
 
         public override void _PhysicsProcess(float delta)
@@ -37,5 +40,7 @@ namespace GameOff2020.Entities.Spies
             Velocity = Velocity.Normalized() * _movementSpeed;
             Position += Velocity * delta;
         }
+
+        private void OnGamePaused(bool isPaused) => _wordLabel.Text = isPaused ? string.Empty : _word;
     }
 }

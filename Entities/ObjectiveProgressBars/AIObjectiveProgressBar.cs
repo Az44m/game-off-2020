@@ -25,6 +25,12 @@ namespace GameOff2020.Entities.ObjectiveProgressBars
                 AddChild(_spawnService.SpawnAISpy());
         }
 
+        protected override void OnGameStarted()
+        {
+            _timeoutCounter = 0;
+            base.OnGameStarted();
+        }
+
         private void OnPlayerSpyEntered(string word) => Value -= _wordService.CalculateScore(word);
     }
 }

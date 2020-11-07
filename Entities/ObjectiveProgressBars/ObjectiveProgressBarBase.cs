@@ -20,10 +20,11 @@ namespace GameOff2020.Entities.ObjectiveProgressBars
 
         protected virtual void Progress() => Value++;
 
-        private void OnGameStarted()
+        protected virtual void OnGameStarted()
         {
-            if (_progressTimer.IsStopped())
-                _progressTimer.Start(0);
+            Value = 0;
+            Progress();
+            _progressTimer.Start(0);
         }
     }
 }

@@ -26,6 +26,7 @@ namespace GameOff2020.Entities.Services
         public void StartGame()
         {
             GameState = GameState.Started;
+            GetTree().Paused = false;
             _signalService.EmitSignal(nameof(SignalService.GameStarted));
         }
 

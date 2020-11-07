@@ -6,7 +6,7 @@ namespace GameOff2020.Entities
     public class WordInputField : LineEdit
     {
         private RegEx _regex;
-        private string _oldText = string.Empty;
+        private string _oldText;
         private SignalService _signalService;
         private WordService _wordService;
         private SpawnService _spawnService;
@@ -22,6 +22,8 @@ namespace GameOff2020.Entities
 
             _regex = new RegEx();
             _regex.Compile(@"^[a-zA-Z]*$");
+
+            _signalService.Connect(nameof(SignalService.GameStarted), this, nameof(OnGameStarted));
         }
 
         private void OnTextChanged(string newString)
@@ -69,6 +71,14 @@ namespace GameOff2020.Entities
                     GD.Print("NOT valid word");
                 }
             }
+        }
+
+        private void OnGameStarted()
+        {
+            Text = string.Empty;
+            _oldText = string.Empty;
+
+            GrabFocus();
         }
     }
 }

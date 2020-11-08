@@ -34,6 +34,7 @@ anchor_right = 1.0
 anchor_bottom = 0.5
 margin_top = -20.5
 margin_bottom = 20.5
+rect_pivot_offset = Vector2( 512, 20 )
 expand_to_text_length = true
 context_menu_enabled = false
 shortcut_keys_enabled = false

@@ -21,7 +21,7 @@ namespace GameOff2020.Entities.Services
 
         public SpyBase SpawnPlayerSpy(string word)
         {
-            var spy = (SpyBase) ResourceLoader.Load<PackedScene>("res://Entities/Spies/PlayerSpy.tscn").Instance();
+            var spy = (SpyBase) Godot.ResourceLoader.Load<PackedScene>("res://Entities/Spies/PlayerSpy.tscn").Instance();
             spy.Word = word;
             _playerSpies.Add(spy);
             return spy;
@@ -29,7 +29,7 @@ namespace GameOff2020.Entities.Services
 
         public SpyBase SpawnAISpy()
         {
-            var spy = (SpyBase) ResourceLoader.Load<PackedScene>("res://Entities/Spies/AISpy.tscn").Instance();
+            var spy = (SpyBase) Godot.ResourceLoader.Load<PackedScene>("res://Entities/Spies/AISpy.tscn").Instance();
             _aiSpies.Add(spy);
             return spy;
         }

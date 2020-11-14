@@ -15,3 +15,6 @@ data_*/
 *.user
 *.userosscache
 *.sln.docstates
+
+# Build
+build/

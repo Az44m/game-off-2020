@@ -37,11 +37,14 @@ __meta__ = {
 }
 
 [node name="WordInputField" type="LineEdit" parent="."]
+anchor_left = 0.5
 anchor_top = 0.5
-anchor_right = 1.0
+anchor_right = 0.5
 anchor_bottom = 0.5
-margin_top = -20.5
-margin_bottom = 20.5
+margin_left = -261.0
+margin_top = -21.0
+margin_right = 261.0
+margin_bottom = 21.0
 rect_pivot_offset = Vector2( 512, 20 )
 expand_to_text_length = true
 context_menu_enabled = false
@@ -53,27 +56,16 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="PlayerProgressBar" type="ProgressBar" parent="."]
-margin_right = 300.0
-margin_bottom = 31.0
-step = 1.0
+[node name="PlayerProgressBar" type="Sprite" parent="."]
+position = Vector2( 259, 332 )
 script = ExtResource( 6 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Timer" type="Timer" parent="PlayerProgressBar"]
 
-[node name="AIProgressBar" type="ProgressBar" parent="."]
-anchor_left = 1.0
-anchor_right = 1.0
-margin_left = -300.0
-margin_bottom = 31.0
-step = 1.0
+[node name="AIProgressBar" type="Sprite" parent="."]
+position = Vector2( 1341, 332 )
+flip_h = true
 script = ExtResource( 5 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
 [node name="Timer" type="Timer" parent="AIProgressBar"]
 

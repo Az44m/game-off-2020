@@ -25,3 +25,9 @@ WordService="*res://Entities/Services/WordService.tscn"
 SignalService="*res://Entities/Services/SignalService.tscn"
 SpawnService="*res://Entities/Services/SpawnService.tscn"
 GameStateService="*res://Entities/Services/GameStateService.tscn"
+
+[display]
+
+window/size/width=1600
+window/size/height=900
+window/size/resizable=false

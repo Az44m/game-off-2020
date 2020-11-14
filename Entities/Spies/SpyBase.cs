@@ -5,7 +5,7 @@ namespace GameOff2020.Entities.Spies
 {
     public abstract class SpyBase : Area2D
     {
-        private int _movementSpeed = 20;
+        private int _movementSpeed = 34;
         private Label _wordLabel;
 
         private string _word;

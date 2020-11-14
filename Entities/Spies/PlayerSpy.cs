@@ -8,7 +8,7 @@ namespace GameOff2020.Entities.Spies
         {
             base._Ready();
             Velocity = Vector2.Right;
-            GlobalPosition = new Vector2(50, 550);
+            GlobalPosition = new Vector2(50, 850);
         }
     }
 }

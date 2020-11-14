@@ -78,7 +78,7 @@ __meta__ = {
 [node name="Timer" type="Timer" parent="AIProgressBar"]
 
 [node name="PlayerSpaceCenter" type="Area2D" parent="."]
-position = Vector2( 50, 550 )
+position = Vector2( 50, 850 )
 script = ExtResource( 8 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerSpaceCenter"]
@@ -89,7 +89,7 @@ shape = SubResource( 1 )
 texture = ExtResource( 2 )
 
 [node name="AISpaceCenter" type="Area2D" parent="."]
-position = Vector2( 974, 550 )
+position = Vector2( 1550, 850 )
 script = ExtResource( 7 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AISpaceCenter"]

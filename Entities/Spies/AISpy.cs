@@ -11,7 +11,7 @@ namespace GameOff2020.Entities.Spies
 
             Velocity = Vector2.Left;
             Word = WordService.GetRandomSpaceWord();
-            GlobalPosition = new Vector2(974, 550);
+            GlobalPosition = new Vector2(1550, 850);
 
             var signalService = GetNode<SignalService>("/root/SignalService");
             signalService.Connect(nameof(SignalService.SpaceWordFound), this, nameof(OnSpaceWordFound));

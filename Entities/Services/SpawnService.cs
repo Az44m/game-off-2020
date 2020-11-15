@@ -42,7 +42,8 @@ namespace GameOff2020.Entities.Services
             else if (_aiSpies.Contains(spy))
                 _aiSpies.Remove(spy);
 
-            spy.QueueFree();
+            if (IsInstanceValid(spy))
+                spy.QueueFree();
         }
 
         private void OnGameStarted()

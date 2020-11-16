@@ -21,7 +21,12 @@ namespace GameOff2020.Entities
 
         private void OnNewLettersRequested() => UpdateLetters();
         private void OnLetterWordFound() => UpdateLetters();
-        private void OnGameStarted() => UpdateLetters();
+        private void OnGameStarted()
+        {
+            Visible = true;
+            UpdateLetters();
+        }
+
         private void UpdateLetters() => Text = string.Join(" ", _wordService.GetRandomLetters(10));
         private void OnGamePaused(bool isPaused) => Visible = !isPaused;
     }

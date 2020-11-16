@@ -1,5 +1,4 @@
 using GameOff2020.Entities.Services;
-using Godot;
 
 namespace GameOff2020.Entities.ObjectiveProgressBars
 {
@@ -8,6 +7,8 @@ namespace GameOff2020.Entities.ObjectiveProgressBars
         private SpawnService _spawnService;
         private WordService _wordService;
         private int _timeoutCounter;
+
+        protected override string ResourcePrefix => "AI";
 
         public override void _Ready()
         {

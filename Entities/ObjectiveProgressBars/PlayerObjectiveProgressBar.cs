@@ -5,6 +5,7 @@ namespace GameOff2020.Entities.ObjectiveProgressBars
     public class PlayerObjectiveProgressBar : ObjectiveProgressBarBase
     {
         private WordService _wordService;
+        protected override string ResourcePrefix => "Player";
 
         public override void _Ready()
         {

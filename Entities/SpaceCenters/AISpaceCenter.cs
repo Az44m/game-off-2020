@@ -9,18 +9,20 @@ namespace GameOff2020.Entities.SpaceCenters
     {
         private Random _random;
         private Timer _exposureTimer;
+        private Timer _spyTimer;
         protected override string EnterSignalName { get; } = nameof(SignalService.PlayerSpyEntered);
 
         public override void _Ready()
         {
             base._Ready();
-
             _random = new Random();
 
-            _exposureTimer = GetNode<Timer>("Timer");
+            _exposureTimer = GetNode<Timer>("ExposureTimer");
             _exposureTimer.Connect("timeout", this, nameof(TryToExposePlayerSpy));
-            var signalService = GetNode<SignalService>("/root/SignalService");
-            signalService.Connect(nameof(SignalService.GameStarted), this, nameof(OnGameStarted));
+
+            _spyTimer = GetNode<Timer>("SpyTimer");
+            _spyTimer.WaitTime = 7;
+            _spyTimer.Connect("timeout", this, nameof(SpawnSpy));
         }
 
         private void TryToExposePlayerSpy()
@@ -33,6 +35,14 @@ namespace GameOff2020.Entities.SpaceCenters
             var exposureChance = CalculateExposureChance(selectedSpy.Word.Length);
             if (_random.NextDouble() < exposureChance)
                 SpawnService.Destroy(selectedSpy);
+        }
+
+        private void SpawnSpy()
+        {
+            var spy = SpawnService.SpawnAISpy();
+            SpyContainer.AddChild(spy);
+            spy.Position = Vector2.Zero;
+            OpenDoor();
         }
 
         private float CalculateExposureChance(int length)
@@ -52,6 +62,11 @@ namespace GameOff2020.Entities.SpaceCenters
             return 0.0034f; // 5% overall
         }
 
-        private void OnGameStarted() => _exposureTimer.Start(0);
+        protected override void OnGameStarted()
+        {
+            base.OnGameStarted();
+            _exposureTimer.Start(0);
+            _spyTimer.Start(0);
+        }
     }
 }

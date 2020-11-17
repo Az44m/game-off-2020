@@ -6,6 +6,7 @@ namespace GameOff2020.Entities.ObjectiveProgressBars
     {
         private WordService _wordService;
         protected override string ResourcePrefix => "Player";
+        protected override bool GameOverState => true;
 
         public override void _Ready()
         {
@@ -14,14 +15,6 @@ namespace GameOff2020.Entities.ObjectiveProgressBars
             _wordService = GetNode<WordService>("/root/WordService");
             SignalService.Connect(nameof(SignalService.AISpyEntered), this, nameof(OnAISpyEntered));
             SignalService.Connect(nameof(SignalService.RequestNewLetters), this, nameof(OnNewLettersRequested));
-        }
-
-        protected override void Progress()
-        {
-            base.Progress();
-
-            if (Value >= 100)
-                GameStateService.GameOver(true);
         }
 
         private void OnAISpyEntered(string word) => Value -= _wordService.CalculateScore(word);

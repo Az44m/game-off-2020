@@ -8,10 +8,10 @@ namespace GameOff2020.Entities.Services
         public delegate void RequestNewLetters();
 
         [Signal]
-        public delegate void SpaceWordFound(string word);
+        public delegate void AISpyWordFound(string word);
 
         [Signal]
-        public delegate void LetterWordFound();
+        public delegate void LetterWordFound(string word);
 
         [Signal]
         public delegate void AISpyEntered(string word);

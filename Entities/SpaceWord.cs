@@ -11,13 +11,13 @@ namespace GameOff2020.Entities
         public override void _Ready()
         {
             _signalService = GetNode<SignalService>("/root/SignalService");
-            _signalService.Connect(nameof(SignalService.SpaceWordFound), this, nameof(OnSpaceWordFound));
+            _signalService.Connect(nameof(SignalService.AISpyWordFound), this, nameof(OnAISpyWordFound));
 
             _wordService = GetNode<WordService>("/root/WordService");
-            Text = _wordService.GetRandomSpaceWord();
+            Text = _wordService.GetRandomAISpyWord();
         }
 
         // ReSharper disable once UnusedParameter.Local
-        private void OnSpaceWordFound(string word) => Text = _wordService.GetRandomSpaceWord();
+        private void OnAISpyWordFound(string word) => Text = _wordService.GetRandomAISpyWord();
     }
 }

@@ -28,6 +28,7 @@ namespace GameOff2020.Entities.ObjectiveProgressBars
         }
 
         protected abstract string ResourcePrefix { get; }
+        protected abstract bool GameOverState { get; }
 
         public override void _Ready()
         {
@@ -41,7 +42,12 @@ namespace GameOff2020.Entities.ObjectiveProgressBars
             LoadRocketTextures();
         }
 
-        protected virtual void Progress() => Value++;
+        protected virtual void Progress()
+        {
+            Value++;
+            if (Value >= 100)
+                GameStateService.GameOver(GameOverState);
+        }
 
         protected virtual void OnGameStarted()
         {

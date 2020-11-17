@@ -59,7 +59,7 @@ namespace GameOff2020.Entities.Services
             return _currentLetters;
         }
 
-        private readonly string[] _spaceWords =
+        private readonly string[] _aiSpyWords =
         {
             "SPACE", "EARTH", "MARS", "MOON", "SOLAR", "JUPITER", "NEPTUNE", "MERCURY", "SATURN", "PLUTO", "VENUS", "URANUS", "PLANET", "ASTEROID",
             "ASTRONAUT", "ASTRONAUTS", "ASTRONOMER", "ASTRONOMICAL", "ASTRONOMY", "CONSTELLATION", "COSMOS", "COSMIC", "CRATER", "DUST", "EQUINOX",
@@ -70,8 +70,8 @@ namespace GameOff2020.Entities.Services
             "ARMSTRONG", "KENNEDY", "ARTEMIS", "MOONBEAM"
         };
 
-        public string GetRandomSpaceWord() => _spaceWords[_random.Next(0, _spaceWords.Length)];
+        public string GetRandomAISpyWord() => _aiSpyWords[_random.Next(0, _aiSpyWords.Length)];
 
-        public bool IsValidSpaceWord(string word) => _spaceWords.Contains(word.ToUpper());
+        public bool IsValidAISpyWord(string word) => _aiSpyWords.Contains(word.ToUpper());
     }
 }

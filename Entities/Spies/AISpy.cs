@@ -10,14 +10,14 @@ namespace GameOff2020.Entities.Spies
             base._Ready();
 
             Velocity = Vector2.Left;
-            Word = WordService.GetRandomSpaceWord();
+            Word = WordService.GetRandomAISpyWord();
             GlobalPosition = new Vector2(1550, 850);
 
             var signalService = GetNode<SignalService>("/root/SignalService");
-            signalService.Connect(nameof(SignalService.SpaceWordFound), this, nameof(OnSpaceWordFound));
+            signalService.Connect(nameof(SignalService.AISpyWordFound), this, nameof(OnAISpyWordFound));
         }
 
-        private void OnSpaceWordFound(string word)
+        private void OnAISpyWordFound(string word)
         {
             if (string.Equals(word, Word))
                 QueueFree();

@@ -20,7 +20,8 @@ namespace GameOff2020.Entities
         }
 
         private void OnNewLettersRequested() => UpdateLetters();
-        private void OnLetterWordFound() => UpdateLetters();
+        // ReSharper disable once UnusedParameter.Local
+        private void OnLetterWordFound(string word) => UpdateLetters();
         private void OnGameStarted()
         {
             Visible = true;

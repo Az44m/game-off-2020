@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://Entities/Game.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Entities/UI/StartButton.cs" type="Script" id=2]
@@ -6,6 +6,7 @@
 [ext_resource path="res://Entities/UI/UILabel.cs" type="Script" id=4]
 [ext_resource path="res://Entities/UI/RestartButton.cs" type="Script" id=5]
 [ext_resource path="res://Entities/UI/QuitButton.cs" type="Script" id=6]
+[ext_resource path="res://Resources/Fonts/Inconsolata-Regular.tres" type="DynamicFont" id=7]
 
 [node name="Main" type="Node"]
 
@@ -37,6 +38,7 @@ margin_left = -90.0
 margin_top = -150.0
 margin_right = 90.0
 margin_bottom = -130.0
+custom_fonts/font = ExtResource( 7 )
 text = "Name of the game"
 align = 1
 valign = 1
@@ -60,9 +62,10 @@ __meta__ = {
 }
 
 [node name="StartButton" type="Button" parent="UI/Menu"]
-margin_top = 28.0
+margin_top = 22.0
 margin_right = 180.0
 margin_bottom = 48.0
+custom_fonts/font = ExtResource( 7 )
 text = "Start"
 script = ExtResource( 2 )
 
@@ -71,12 +74,14 @@ visible = false
 margin_top = 41.0
 margin_right = 181.0
 margin_bottom = 61.0
+custom_fonts/font = ExtResource( 7 )
 text = "Restart"
 script = ExtResource( 5 )
 
 [node name="QuitButton" type="Button" parent="UI/Menu"]
 margin_top = 52.0
 margin_right = 180.0
-margin_bottom = 72.0
+margin_bottom = 78.0
+custom_fonts/font = ExtResource( 7 )
 text = "Quit"
 script = ExtResource( 6 )

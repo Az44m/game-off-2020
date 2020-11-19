@@ -1,4 +1,5 @@
-﻿using Godot;
+﻿using GameOff2020.Entities.Spies;
+using Godot;
 
 namespace GameOff2020.Entities.Services
 {
@@ -29,9 +30,9 @@ namespace GameOff2020.Entities.Services
         public delegate void GamePaused(bool isPaused);
 
         [Signal]
-        public delegate void AISpyExposed();
+        public delegate void AISpyExposed(SpyBase spy);
 
         [Signal]
-        public delegate void PlayerSpyExposed();
+        public delegate void PlayerSpyExposed(SpyBase spy);
     }
 }

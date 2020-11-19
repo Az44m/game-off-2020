@@ -36,8 +36,7 @@ namespace GameOff2020.Entities.SpaceCenters
             if (!(_random.NextDouble() < exposureChance))
                 return;
 
-            SignalService.EmitSignal(nameof(SignalService.PlayerSpyExposed));
-            SpawnService.Destroy(selectedSpy);
+            SignalService.EmitSignal(nameof(SignalService.PlayerSpyExposed), selectedSpy);
         }
 
         private void SpawnSpy()

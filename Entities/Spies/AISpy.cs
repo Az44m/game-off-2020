@@ -27,8 +27,7 @@ namespace GameOff2020.Entities.Spies
             if (!string.Equals(word, Word))
                 return;
 
-            _signalService.EmitSignal(nameof(SignalService.AISpyExposed));
-            _spawnService.Destroy(this);
+            _signalService.EmitSignal(nameof(SignalService.AISpyExposed), this);
         }
     }
 }

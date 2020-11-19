@@ -33,8 +33,11 @@ namespace GameOff2020.Entities.SpaceCenters
 
             var selectedSpy = playerSpies.Count == 1 ? playerSpies[0] : playerSpies[_random.Next(0, playerSpies.Count)];
             var exposureChance = CalculateExposureChance(selectedSpy.Word.Length);
-            if (_random.NextDouble() < exposureChance)
-                SpawnService.Destroy(selectedSpy);
+            if (!(_random.NextDouble() < exposureChance))
+                return;
+
+            SignalService.EmitSignal(nameof(SignalService.PlayerSpyExposed));
+            SpawnService.Destroy(selectedSpy);
         }
 
         private void SpawnSpy()

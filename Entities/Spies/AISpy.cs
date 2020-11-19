@@ -5,6 +5,9 @@ namespace GameOff2020.Entities.Spies
 {
     public class AISpy : SpyBase
     {
+        private SignalService _signalService;
+        private SpawnService _spawnService;
+
         public override void _Ready()
         {
             base._Ready();
@@ -13,14 +16,19 @@ namespace GameOff2020.Entities.Spies
             Word = WordService.GetRandomAISpyWord();
             GlobalPosition = new Vector2(1550, 850);
 
-            var signalService = GetNode<SignalService>("/root/SignalService");
-            signalService.Connect(nameof(SignalService.AISpyWordFound), this, nameof(OnAISpyWordFound));
+            _spawnService = GetNode<SpawnService>("/root/SpawnService");
+
+            _signalService = GetNode<SignalService>("/root/SignalService");
+            _signalService.Connect(nameof(SignalService.AISpyWordFound), this, nameof(OnAISpyWordFound));
         }
 
         private void OnAISpyWordFound(string word)
         {
-            if (string.Equals(word, Word))
-                QueueFree();
+            if (!string.Equals(word, Word))
+                return;
+
+            _signalService.EmitSignal(nameof(SignalService.AISpyExposed));
+            _spawnService.Destroy(this);
         }
     }
 }

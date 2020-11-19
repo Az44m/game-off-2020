@@ -1,17 +1,23 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=23 format=2]
 
 [ext_resource path="res://Entities/Game.cs" type="Script" id=1]
+[ext_resource path="res://Resources/Guard/Player_Guard_Alert.png" type="Texture" id=2]
 [ext_resource path="res://Entities/WordInputField.cs" type="Script" id=3]
 [ext_resource path="res://Entities/Letters.cs" type="Script" id=4]
 [ext_resource path="res://Entities/ObjectiveProgressBars/AIObjectiveProgressBar.cs" type="Script" id=5]
 [ext_resource path="res://Entities/ObjectiveProgressBars/PlayerObjectiveProgressBar.cs" type="Script" id=6]
 [ext_resource path="res://Entities/SpaceCenters/AISpaceCenter.cs" type="Script" id=7]
 [ext_resource path="res://Entities/SpaceCenters/PlayerSpaceCenter.cs" type="Script" id=8]
+[ext_resource path="res://Resources/Guard/Player_Guard_Standby.png" type="Texture" id=9]
 [ext_resource path="res://Resources/SpaceCenter/Player_Space_Center_Static.png" type="Texture" id=10]
 [ext_resource path="res://Resources/SpaceCenter/Player_Space_Center_Frame_3.png" type="Texture" id=11]
 [ext_resource path="res://Resources/SpaceCenter/Player_Space_Center_Frame_4.png" type="Texture" id=12]
 [ext_resource path="res://Resources/SpaceCenter/Player_Space_Center_Frame_1.png" type="Texture" id=13]
 [ext_resource path="res://Resources/SpaceCenter/Player_Space_Center_Frame_2.png" type="Texture" id=14]
+[ext_resource path="res://Resources/Guard/AI_Guard_Standby.png" type="Texture" id=15]
+[ext_resource path="res://Resources/Guard/AI_Guard_Alert.png" type="Texture" id=16]
+[ext_resource path="res://Entities/Guards/PlayerGuard.cs" type="Script" id=17]
+[ext_resource path="res://Entities/Guards/AIGuard.cs" type="Script" id=18]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -26,8 +32,24 @@ animations = [ {
 "speed": 4.0
 } ]
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ ExtResource( 9 ), ExtResource( 2 ) ],
+"loop": false,
+"name": "expose",
+"speed": 5.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 2, 32 )
+
+[sub_resource type="SpriteFrames" id=4]
+animations = [ {
+"frames": [ ExtResource( 15 ), ExtResource( 16 ) ],
+"loop": false,
+"name": "expose",
+"speed": 5.0
+} ]
 
 [node name="Game" type="Node"]
 script = ExtResource( 1 )
@@ -107,9 +129,15 @@ __meta__ = {
 "_editor_description_": ""
 }
 
+[node name="Guard" type="AnimatedSprite" parent="PlayerSpaceCenter/AnimatedDoor"]
+position = Vector2( -32.5, -26 )
+frames = SubResource( 2 )
+animation = "expose"
+script = ExtResource( 17 )
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerSpaceCenter"]
 position = Vector2( 190, -17 )
-shape = SubResource( 2 )
+shape = SubResource( 3 )
 
 [node name="AISpaceCenter" type="Area2D" parent="."]
 position = Vector2( 1550, 850 )
@@ -131,9 +159,15 @@ frames = SubResource( 1 )
 animation = "open"
 flip_h = true
 
+[node name="Guard" type="AnimatedSprite" parent="AISpaceCenter/AnimatedDoor"]
+position = Vector2( 32.5, -26 )
+frames = SubResource( 4 )
+animation = "expose"
+script = ExtResource( 18 )
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AISpaceCenter"]
 position = Vector2( -190, -17 )
-shape = SubResource( 2 )
+shape = SubResource( 3 )
 
 [node name="ExposureTimer" type="Timer" parent="AISpaceCenter"]
 wait_time = 2.3

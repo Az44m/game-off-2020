@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/108012__ryansnook__klaxon4.wav-67d2070a901a5a64f1691f765208403a.sample"
+
+[deps]
+
+source_file="res://Resources/Sounds/108012__ryansnook__klaxon4.wav"
+dest_files=[ "res://.import/108012__ryansnook__klaxon4.wav-67d2070a901a5a64f1691f765208403a.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/142608__autistic-lucario__error.wav-78342046e3fe39162e05390185c035de.sample"
+
+[deps]
+
+source_file="res://Resources/Sounds/142608__autistic-lucario__error.wav"
+dest_files=[ "res://.import/142608__autistic-lucario__error.wav-78342046e3fe39162e05390185c035de.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

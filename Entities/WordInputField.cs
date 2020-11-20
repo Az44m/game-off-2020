@@ -11,11 +11,14 @@ namespace GameOff2020.Entities
         private WordService _wordService;
         private int _shakeIndex;
         private Vector2 _originalRectPosition;
+        private AudioStreamPlayer _wrongWordAudioPlayer;
 
         public override void _Ready()
         {
             _originalRectPosition = RectGlobalPosition;
             _shakeIndex = _shakePositions.Length;
+
+            _wrongWordAudioPlayer = GetNode<AudioStreamPlayer>("WrongWordAudioPlayer");
 
             _signalService = GetNode<SignalService>("/root/SignalService");
             _wordService = GetNode<WordService>("/root/WordService");
@@ -70,8 +73,11 @@ namespace GameOff2020.Entities
                 }
                 else
                 {
-                    if (_shakeIndex == _shakePositions.Length)
+                    if (_shakeIndex == _shakePositions.Length && !_wrongWordAudioPlayer.Playing)
+                    {
                         TriggerShake();
+                        _wrongWordAudioPlayer.Play();
+                    }
                 }
             }
         }

@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/music_zapsplat_last_chance_103.wav-da4d1a7dd7c0f6f388949763e63aba48.sample"
+
+[deps]
+
+source_file="res://Resources/Sounds/music_zapsplat_last_chance_103.wav"
+dest_files=[ "res://.import/music_zapsplat_last_chance_103.wav-da4d1a7dd7c0f6f388949763e63aba48.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=true
+compress/mode=0

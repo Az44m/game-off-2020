@@ -8,6 +8,7 @@ namespace GameOff2020.Entities
         private RegEx _regex;
         private string _oldText;
         private SignalService _signalService;
+        private GameStateService _gameStateService;
         private WordService _wordService;
         private int _shakeIndex;
         private Vector2 _originalRectPosition;
@@ -23,6 +24,7 @@ namespace GameOff2020.Entities
             _correctWordAudioPlayer = GetNode<AudioStreamPlayer>("CorrectWordAudioPlayer");
 
             _signalService = GetNode<SignalService>("/root/SignalService");
+            _gameStateService = GetNode<GameStateService>("/root/GameStateService");
             _wordService = GetNode<WordService>("/root/WordService");
 
             Connect("text_changed", this, nameof(OnTextChanged));
@@ -72,15 +74,16 @@ namespace GameOff2020.Entities
                     Text = string.Empty;
                     _oldText = string.Empty;
                     _signalService.EmitSignal(nameof(SignalService.LetterWordFound), newString.ToUpper());
-                    if (!_correctWordAudioPlayer.Playing)
+                    if (!_correctWordAudioPlayer.Playing && _gameStateService.IsSoundOn)
                         _correctWordAudioPlayer.Play();
                 }
                 else
                 {
-                    if (_shakeIndex == _shakePositions.Length && !_wrongWordAudioPlayer.Playing)
+                    if (_shakeIndex == _shakePositions.Length)
                     {
                         TriggerShake();
-                        _wrongWordAudioPlayer.Play();
+                        if (!_wrongWordAudioPlayer.Playing && _gameStateService.IsSoundOn)
+                            _wrongWordAudioPlayer.Play();
                     }
                 }
             }

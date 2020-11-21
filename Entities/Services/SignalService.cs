@@ -34,5 +34,8 @@ namespace GameOff2020.Entities.Services
 
         [Signal]
         public delegate void PlayerSpyExposed(SpyBase spy);
+
+        [Signal]
+        public delegate void MusicSettingChanged(bool isEnabled);
     }
 }

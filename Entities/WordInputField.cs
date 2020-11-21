@@ -12,6 +12,7 @@ namespace GameOff2020.Entities
         private int _shakeIndex;
         private Vector2 _originalRectPosition;
         private AudioStreamPlayer _wrongWordAudioPlayer;
+        private AudioStreamPlayer _correctWordAudioPlayer;
 
         public override void _Ready()
         {
@@ -19,6 +20,7 @@ namespace GameOff2020.Entities
             _shakeIndex = _shakePositions.Length;
 
             _wrongWordAudioPlayer = GetNode<AudioStreamPlayer>("WrongWordAudioPlayer");
+            _correctWordAudioPlayer = GetNode<AudioStreamPlayer>("CorrectWordAudioPlayer");
 
             _signalService = GetNode<SignalService>("/root/SignalService");
             _wordService = GetNode<WordService>("/root/WordService");
@@ -70,6 +72,8 @@ namespace GameOff2020.Entities
                     Text = string.Empty;
                     _oldText = string.Empty;
                     _signalService.EmitSignal(nameof(SignalService.LetterWordFound), newString.ToUpper());
+                    if (!_correctWordAudioPlayer.Playing)
+                        _correctWordAudioPlayer.Play();
                 }
                 else
                 {

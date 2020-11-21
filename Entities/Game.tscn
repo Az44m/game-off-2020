@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=27 format=2]
 
 [ext_resource path="res://Entities/Game.cs" type="Script" id=1]
 [ext_resource path="res://Resources/Guard/Player_Guard_Alert.png" type="Texture" id=2]
@@ -21,6 +21,7 @@
 [ext_resource path="res://Resources/Fonts/Inconsolata-Regular.tres" type="DynamicFont" id=19]
 [ext_resource path="res://Resources/Sounds/142608__autistic-lucario__error.wav" type="AudioStream" id=20]
 [ext_resource path="res://Resources/Sounds/108012__ryansnook__klaxon4.wav" type="AudioStream" id=21]
+[ext_resource path="res://Resources/Sounds/542004__bay-area-bob__gasp-marimba-correct-1.wav" type="AudioStream" id=22]
 
 [sub_resource type="SpriteFrames" id=1]
 animations = [ {
@@ -103,6 +104,9 @@ __meta__ = {
 
 [node name="WrongWordAudioPlayer" type="AudioStreamPlayer" parent="WordInputField"]
 stream = ExtResource( 20 )
+
+[node name="CorrectWordAudioPlayer" type="AudioStreamPlayer" parent="WordInputField"]
+stream = ExtResource( 22 )
 
 [node name="PlayerProgressBar" type="Sprite" parent="."]
 position = Vector2( 254, 379 )

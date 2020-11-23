@@ -91,6 +91,7 @@ namespace GameOff2020.Entities
 
         private void OnGameStarted()
         {
+            Visible = true;
             Text = string.Empty;
             _oldText = string.Empty;
 

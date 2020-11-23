@@ -18,7 +18,6 @@ namespace GameOff2020.Entities.Services
 
         public GameState GameState { get; private set; } = GameState.UnStarted;
 
-        //TODO Change ZIndex on gameover
         public bool IsMusicOn
         {
             get => getConfig("IsMusicOn");

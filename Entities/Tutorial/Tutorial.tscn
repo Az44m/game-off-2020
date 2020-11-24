@@ -1,0 +1,448 @@
+[gd_scene load_steps=37 format=2]
+
+[ext_resource path="res://Resources/Shaders/AIRocket.shader" type="Shader" id=1]
+[ext_resource path="res://Resources/Shaders/PlayerRocket.shader" type="Shader" id=2]
+[ext_resource path="res://Resources/Shaders/PlayerSpaceCenter.shader" type="Shader" id=3]
+[ext_resource path="res://Resources/Rocket/AI_Rocket_Progress_20.png" type="Texture" id=4]
+[ext_resource path="res://Resources/Rocket/Player_Rocket_Progress_60.png" type="Texture" id=5]
+[ext_resource path="res://Resources/Rocket/Player_Rocket_Progress_52.png" type="Texture" id=6]
+[ext_resource path="res://Resources/Rocket/Player_Rocket_Progress_48.png" type="Texture" id=7]
+[ext_resource path="res://Resources/Rocket/Player_Rocket_Progress_56.png" type="Texture" id=8]
+[ext_resource path="res://Resources/Rocket/Player_Rocket_Progress_64.png" type="Texture" id=9]
+[ext_resource path="res://Entities/Spies/TutorialSpy.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Resources/SpaceCenter/Player_Space_Center_Frame_2.png" type="Texture" id=11]
+[ext_resource path="res://Resources/SpaceCenter/Player_Space_Center_Frame_1.png" type="Texture" id=12]
+[ext_resource path="res://Resources/Guard/AI_Guard_Alert.png" type="Texture" id=13]
+[ext_resource path="res://Resources/Guard/AI_Guard_Standby.png" type="Texture" id=14]
+[ext_resource path="res://Resources/SpaceCenter/Player_Space_Center_Static.png" type="Texture" id=15]
+[ext_resource path="res://Resources/SpaceCenter/Player_Space_Center_Frame_3.png" type="Texture" id=16]
+[ext_resource path="res://Resources/SpaceCenter/Player_Space_Center_Frame_4.png" type="Texture" id=17]
+[ext_resource path="res://Resources/Guard/Player_Guard_Standby.png" type="Texture" id=18]
+[ext_resource path="res://Resources/Guard/Player_Guard_Alert.png" type="Texture" id=19]
+[ext_resource path="res://Resources/Fonts/Inconsolata-Regular.tres" type="DynamicFont" id=20]
+[ext_resource path="res://Resources/Shaders/FullTransparent.shader" type="Shader" id=21]
+[ext_resource path="res://Entities/Tutorial/Tutorial.cs" type="Script" id=22]
+
+[sub_resource type="SpriteFrames" id=1]
+animations = [ {
+"frames": [ ExtResource( 7 ), ExtResource( 6 ), ExtResource( 8 ), ExtResource( 5 ), ExtResource( 9 ) ],
+"loop": true,
+"name": "default",
+"speed": 1.0
+} ]
+
+[sub_resource type="SpriteFrames" id=2]
+animations = [ {
+"frames": [ ExtResource( 17 ), ExtResource( 16 ), ExtResource( 11 ), ExtResource( 12 ) ],
+"loop": false,
+"name": "close",
+"speed": 4.0
+}, {
+"frames": [ ExtResource( 12 ), ExtResource( 11 ), ExtResource( 16 ), ExtResource( 17 ) ],
+"loop": false,
+"name": "open",
+"speed": 4.0
+} ]
+
+[sub_resource type="SpriteFrames" id=3]
+animations = [ {
+"frames": [ ExtResource( 18 ), ExtResource( 19 ) ],
+"loop": false,
+"name": "expose",
+"speed": 5.0
+} ]
+
+[sub_resource type="SpriteFrames" id=4]
+animations = [ {
+"frames": [ ExtResource( 14 ), ExtResource( 13 ) ],
+"loop": false,
+"name": "expose",
+"speed": 5.0
+} ]
+
+[sub_resource type="ShaderMaterial" id=5]
+shader = ExtResource( 21 )
+
+[sub_resource type="ShaderMaterial" id=6]
+shader = ExtResource( 2 )
+
+[sub_resource type="ShaderMaterial" id=7]
+shader = ExtResource( 1 )
+
+[sub_resource type="ShaderMaterial" id=8]
+shader = ExtResource( 3 )
+
+[sub_resource type="Shader" id=9]
+code = "shader_type canvas_item;
+uniform sampler2D diffuse;
+
+void fragment() {
+    vec4 col = texture(diffuse, UV).rgba;
+    col.r = 0.0;
+    col.g = 0.0;
+    col.b = 0.0;
+    if (UV.x < 0.67 && UV.x > 0.33 && UV.y < 0.55 && UV.y > 0.29) {
+        col.a = 0.0;
+    } else {
+        col.a = 0.7;
+    }
+    COLOR = col;
+}"
+
+[sub_resource type="ShaderMaterial" id=10]
+shader = SubResource( 9 )
+
+[sub_resource type="Shader" id=11]
+code = "shader_type canvas_item;
+uniform sampler2D diffuse;
+
+void fragment() {
+    vec4 col = texture(diffuse, UV).rgba;
+    col.r = 0.0;
+    col.g = 0.0;
+    col.b = 0.0;
+    if (UV.x > 0.72 && UV.x < 0.78 && UV.y > 0.88) {
+        col.a = 0.0;
+    } else {
+        col.a = 0.7;
+    }
+    COLOR = col;
+}"
+
+[sub_resource type="ShaderMaterial" id=12]
+shader = SubResource( 11 )
+
+[sub_resource type="InputEventKey" id=13]
+scancode = 32
+
+[sub_resource type="ShortCut" id=14]
+shortcut = SubResource( 13 )
+
+[node name="Tutorial" type="Node2D"]
+script = ExtResource( 22 )
+
+[node name="Background" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 2.0
+margin_right = 1600.0
+margin_bottom = 902.0
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": ""
+}
+
+[node name="PlayerProgressBar" type="AnimatedSprite" parent="."]
+position = Vector2( 254, 379 )
+frames = SubResource( 1 )
+
+[node name="AIProgressBar" type="Sprite" parent="."]
+position = Vector2( 1346, 379 )
+texture = ExtResource( 4 )
+
+[node name="PlayerSpaceCenter" type="Node2D" parent="."]
+position = Vector2( 50, 850 )
+
+[node name="StaticDoor" type="Sprite" parent="PlayerSpaceCenter"]
+position = Vector2( 72, -17 )
+texture = ExtResource( 15 )
+
+[node name="AnimatedDoor" type="AnimatedSprite" parent="PlayerSpaceCenter"]
+position = Vector2( 72, -17.5 )
+frames = SubResource( 2 )
+animation = "open"
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="Guard" type="AnimatedSprite" parent="PlayerSpaceCenter/AnimatedDoor"]
+position = Vector2( -32.5, -26 )
+frames = SubResource( 3 )
+animation = "expose"
+
+[node name="AISpaceCenter" type="Node2D" parent="."]
+position = Vector2( 1550, 850 )
+
+[node name="StaticDoor" type="Sprite" parent="AISpaceCenter"]
+position = Vector2( -72, -17 )
+texture = ExtResource( 15 )
+flip_h = true
+
+[node name="AnimatedDoor" type="AnimatedSprite" parent="AISpaceCenter"]
+position = Vector2( -72, -17.5 )
+frames = SubResource( 2 )
+animation = "open"
+flip_h = true
+
+[node name="Guard" type="AnimatedSprite" parent="AISpaceCenter/AnimatedDoor"]
+position = Vector2( 32.5, -26 )
+frames = SubResource( 4 )
+animation = "expose"
+
+[node name="Letters" type="Label" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 714.0
+margin_top = 264.0
+margin_right = 885.0
+margin_bottom = 307.0
+custom_fonts/font = ExtResource( 20 )
+text = "T L E O R A U I S F"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="WordInputField" type="LineEdit" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 539.0
+margin_top = 429.0
+margin_right = 1061.0
+margin_bottom = 471.0
+rect_pivot_offset = Vector2( 512, 20 )
+custom_fonts/font = ExtResource( 20 )
+editable = false
+expand_to_text_length = true
+context_menu_enabled = false
+shortcut_keys_enabled = false
+selecting_enabled = false
+caret_blink = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TutorialSpy" parent="." instance=ExtResource( 10 )]
+position = Vector2( 1200, 850 )
+
+[node name="Prologue" type="Node2D" parent="."]
+
+[node name="PrologueMask" type="ColorRect" parent="Prologue"]
+material = SubResource( 5 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 2.0
+margin_right = 1600.0
+margin_bottom = 902.0
+rect_pivot_offset = Vector2( 388.781, 880 )
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": ""
+}
+
+[node name="PrologueText" type="Label" parent="Prologue"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = 541.0
+margin_top = 38.0
+margin_right = 1059.0
+margin_bottom = 242.0
+custom_fonts/font = ExtResource( 20 )
+text = "We are in the mid-1950s. There is a big competition between the two countries, which rival each other. The goal is to launch the first artificial satellite, send the first human to space, and ultimately to land the first human on the Moon.
+
+Your goal is to send spies to the enemy's country who sabotage the developments, but at the same time expose the spies who are sent to sabotage your work."
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": ""
+}
+
+[node name="PlayerRocketMask" type="ColorRect" parent="."]
+visible = false
+material = SubResource( 6 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 2.0
+margin_right = 1600.0
+margin_bottom = 902.0
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": ""
+}
+
+[node name="PlayerRocketText" type="Label" parent="."]
+visible = false
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = 541.0
+margin_top = 38.0
+margin_right = 1059.0
+margin_bottom = 104.0
+custom_fonts/font = ExtResource( 20 )
+text = "This is your rocket. The workers are placing cover pieces on it in the background. When all 24 pieces are on place, the rocket is complete."
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AIRocketMask" type="ColorRect" parent="."]
+visible = false
+material = SubResource( 7 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 2.0
+margin_right = 1600.0
+margin_bottom = 902.0
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": ""
+}
+
+[node name="AIRocketText" type="Label" parent="."]
+visible = false
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = 541.0
+margin_top = 117.0
+margin_right = 1059.0
+margin_bottom = 183.0
+custom_fonts/font = ExtResource( 20 )
+text = "The opponent does the same. The one who completes the  rocket first is winning."
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SpaceCenterMask" type="ColorRect" parent="."]
+visible = false
+material = SubResource( 8 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 2.0
+margin_right = 1600.0
+margin_bottom = 902.0
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": ""
+}
+
+[node name="SpaceCenterText" type="Label" parent="."]
+visible = false
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = 541.0
+margin_top = 173.0
+margin_right = 1059.0
+margin_bottom = 239.0
+custom_fonts/font = ExtResource( 20 )
+text = "In order to sabotage your opponent's progress, you need to send spies there."
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="WordInputMask" type="ColorRect" parent="."]
+visible = false
+material = SubResource( 10 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 2.0
+margin_right = 1600.0
+margin_bottom = 902.0
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": ""
+}
+
+[node name="WordInputText" type="Label" parent="."]
+visible = false
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = 541.0
+margin_top = 502.0
+margin_right = 1059.0
+margin_bottom = 555.0
+custom_fonts/font = ExtResource( 20 )
+text = "To send spies, you type words in this text field using the letters above. If you cannot find any word, shuffle the letters by pressing <Space>."
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TutorialSpyMask" type="ColorRect" parent="."]
+visible = false
+material = SubResource( 12 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 2.0
+margin_right = 1600.0
+margin_bottom = 902.0
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": ""
+}
+
+[node name="TutorialSpyText" type="Label" parent="."]
+visible = false
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = 541.0
+margin_top = 579.0
+margin_right = 1059.0
+margin_bottom = 632.0
+custom_fonts/font = ExtResource( 20 )
+text = "You can expose the opponent's spies by typing  the  word above their head."
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="EpilogueMask" type="ColorRect" parent="."]
+visible = false
+material = SubResource( 5 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_top = 2.0
+margin_right = 1600.0
+margin_bottom = 902.0
+rect_pivot_offset = Vector2( 388.781, 880 )
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": ""
+}
+
+[node name="EpilogueText" type="Label" parent="."]
+visible = false
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = 541.0
+margin_top = 636.0
+margin_right = 1059.0
+margin_bottom = 702.0
+custom_fonts/font = ExtResource( 20 )
+text = "Be aware! The opponent will try to expose your spies as well! The longer words you use, the harder it is to expose your spies."
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="NextButton" type="Button" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = 710.0
+margin_top = 795.0
+margin_right = 890.0
+margin_bottom = 821.0
+custom_fonts/font = ExtResource( 20 )
+shortcut_in_tooltip = false
+shortcut = SubResource( 14 )
+text = "Next"
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": ""
+}

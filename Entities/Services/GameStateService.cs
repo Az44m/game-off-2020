@@ -30,6 +30,12 @@ namespace GameOff2020.Entities.Services
             set => setConfig("IsSoundOn", value);
         }
 
+        public bool IsFirstTime
+        {
+            get => getConfig("IsFirstTime");
+            set => setConfig("IsFirstTime", value);
+        }
+
         public override void _Ready()
         {
             var file = new File();

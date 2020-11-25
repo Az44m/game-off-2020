@@ -14,6 +14,7 @@ namespace GameOff2020.Entities.ObjectiveProgressBars
         private Timer _progressTimer;
         protected SignalService SignalService;
         protected GameStateService GameStateService;
+        protected AudioStreamPlayer2D SpySabotageAudioPlayer;
 
         private int _value;
 
@@ -37,6 +38,8 @@ namespace GameOff2020.Entities.ObjectiveProgressBars
 
             _progressTimer = GetNode<Timer>("Timer");
             _progressTimer.Connect("timeout", this, nameof(Progress));
+
+            SpySabotageAudioPlayer = GetNode<AudioStreamPlayer2D>("SpySabotageAudioPlayer");
 
             SignalService.Connect(nameof(SignalService.GameStarted), this, nameof(OnGameStarted));
             LoadRocketTextures();

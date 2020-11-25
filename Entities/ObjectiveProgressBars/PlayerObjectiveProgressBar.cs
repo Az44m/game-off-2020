@@ -17,7 +17,12 @@ namespace GameOff2020.Entities.ObjectiveProgressBars
             SignalService.Connect(nameof(SignalService.RequestNewLetters), this, nameof(OnNewLettersRequested));
         }
 
-        private void OnAISpyEntered(string word) => Value -= _wordService.CalculateScore(word);
+        private void OnAISpyEntered(string word)
+        {
+            Value -= _wordService.CalculateScore(word);
+            if (GameStateService.IsSoundOn)
+                SpySabotageAudioPlayer.Play();
+        }
 
         private void OnNewLettersRequested() => Value -= 3;
     }

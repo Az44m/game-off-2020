@@ -34,6 +34,7 @@ namespace GameOff2020.Entities
             _regex.Compile(@"^[a-zA-Z]*$");
 
             _signalService.Connect(nameof(SignalService.GameStarted), this, nameof(OnGameStarted));
+            _signalService.Connect(nameof(SignalService.GameOver), this, nameof(OnGameOver));
             _signalService.Connect(nameof(SignalService.GamePaused), this, nameof(OnGamePaused));
         }
 
@@ -106,6 +107,13 @@ namespace GameOff2020.Entities
             CaretPosition = Text.Length;
             _shakeIndex = _shakePositions.Length;
             ResetPosition();
+        }
+
+        // ReSharper disable once UnusedParameter.Local
+        private void OnGameOver(bool isWin)
+        {
+            _correctWordAudioPlayer.Stop();
+            _wrongWordAudioPlayer.Stop();
         }
 
         public override void _Process(float delta)

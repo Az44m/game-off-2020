@@ -42,6 +42,7 @@ namespace GameOff2020.Entities.ObjectiveProgressBars
             SpySabotageAudioPlayer = GetNode<AudioStreamPlayer2D>("SpySabotageAudioPlayer");
 
             SignalService.Connect(nameof(SignalService.GameStarted), this, nameof(OnGameStarted));
+            SignalService.Connect(nameof(SignalService.GameOver), this, nameof(OnGameOver));
             LoadRocketTextures();
         }
 
@@ -99,5 +100,8 @@ namespace GameOff2020.Entities.ObjectiveProgressBars
                     Texture = _rocketTextures[_rocketTextures.Count - 1];
             }
         }
+
+        // ReSharper disable once UnusedParameter.Local
+        private void OnGameOver(bool isWin) => SpySabotageAudioPlayer.Stop();
     }
 }

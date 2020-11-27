@@ -75,6 +75,10 @@ namespace GameOff2020.Entities.SpaceCenters
         {
             _animatedDoor.ZIndex = 0;
             SpyContainer.ZIndex = 0;
+            _animatedDoor.Stop();
+            OpenDoor();
+            _animatedDoor.Stop();
+            _animatedDoor.Frame = 0;
         }
     }
 }

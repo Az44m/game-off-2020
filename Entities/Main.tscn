@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://Entities/Game.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Entities/UI/StartButton.cs" type="Script" id=2]
@@ -12,6 +12,8 @@
 [ext_resource path="res://Entities/UI/SoundCheckButton.cs" type="Script" id=10]
 [ext_resource path="res://Entities/UI/MusicCheckButton.cs" type="Script" id=11]
 [ext_resource path="res://Entities/Tutorial/Tutorial.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Entities/UI/CreditsButton.cs" type="Script" id=13]
+[ext_resource path="res://Entities/UI/CreditsBack.cs" type="Script" id=14]
 
 [node name="Main" type="Node"]
 
@@ -123,13 +125,126 @@ text = "Sound"
 align = 1
 script = ExtResource( 10 )
 
-[node name="QuitButton" type="Button" parent="UI/Menu"]
+[node name="Credits" type="Button" parent="UI/Menu"]
 margin_top = 118.0
 margin_right = 180.0
 margin_bottom = 144.0
+custom_fonts/font = ExtResource( 7 )
+text = "Credits"
+script = ExtResource( 13 )
+
+[node name="QuitButton" type="Button" parent="UI/Menu"]
+margin_top = 148.0
+margin_right = 180.0
+margin_bottom = 174.0
 custom_fonts/font = ExtResource( 7 )
 text = "Quit"
 script = ExtResource( 6 )
 
 [node name="Tutorial" parent="." instance=ExtResource( 12 )]
 visible = false
+
+[node name="Credits" type="Control" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Background" type="ColorRect" parent="Credits"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 1 )
+
+[node name="CreditContainer" type="HBoxContainer" parent="Credits"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_scale = Vector2( 0.995048, 0.995048 )
+custom_constants/separation = 64
+alignment = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CategoryList" type="VBoxContainer" parent="Credits/CreditContainer"]
+margin_left = 615.0
+margin_right = 768.0
+margin_bottom = 900.0
+alignment = 1
+
+[node name="Font" type="Label" parent="Credits/CreditContainer/CategoryList"]
+margin_top = 381.0
+margin_right = 153.0
+margin_bottom = 401.0
+custom_fonts/font = ExtResource( 7 )
+text = "Font"
+align = 2
+
+[node name="Music" type="Label" parent="Credits/CreditContainer/CategoryList"]
+margin_top = 405.0
+margin_right = 153.0
+margin_bottom = 425.0
+custom_fonts/font = ExtResource( 7 )
+text = "Music            "
+align = 2
+
+[node name="Sound" type="Label" parent="Credits/CreditContainer/CategoryList"]
+margin_top = 429.0
+margin_right = 153.0
+margin_bottom = 518.0
+custom_fonts/font = ExtResource( 7 )
+text = "Sound
+
+
+"
+align = 2
+
+[node name="CreditList" type="VBoxContainer" parent="Credits/CreditContainer"]
+margin_left = 832.0
+margin_right = 985.0
+margin_bottom = 900.0
+alignment = 1
+
+[node name="Font" type="Label" parent="Credits/CreditContainer/CreditList"]
+margin_top = 381.0
+margin_right = 153.0
+margin_bottom = 401.0
+custom_fonts/font = ExtResource( 7 )
+text = "Inconsolata"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Music" type="Label" parent="Credits/CreditContainer/CreditList"]
+margin_top = 405.0
+margin_right = 153.0
+margin_bottom = 425.0
+custom_fonts/font = ExtResource( 7 )
+text = "www.zapsplat.com"
+
+[node name="Sound" type="Label" parent="Credits/CreditContainer/CreditList"]
+margin_top = 429.0
+margin_right = 153.0
+margin_bottom = 518.0
+custom_fonts/font = ExtResource( 7 )
+text = "www.freesound.org
+Ryan Smith
+bay_area_bob
+ryansnook"
+
+[node name="CreditsBack" type="Button" parent="Credits"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -90.0
+margin_top = -105.0
+margin_right = 90.0
+margin_bottom = -79.0
+custom_fonts/font = ExtResource( 7 )
+text = "Back"
+script = ExtResource( 14 )
+__meta__ = {
+"_edit_use_anchors_": false
+}

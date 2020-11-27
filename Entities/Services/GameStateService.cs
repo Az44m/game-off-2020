@@ -7,6 +7,7 @@ namespace GameOff2020.Entities.Services
         UnStarted,
         Started,
         Paused,
+        Credits,
         GameOver
     }
 
@@ -70,6 +71,10 @@ namespace GameOff2020.Entities.Services
             GetTree().Paused = GameState == GameState.Paused;
             _signalService.EmitSignal(nameof(SignalService.GamePaused), GameState == GameState.Paused);
         }
+
+        public void ShowCredits() => GameState = GameState.Credits;
+
+        public void BackToMainMenu() => GameState = GameState.UnStarted;
 
         public void GameOver(bool isWin)
         {

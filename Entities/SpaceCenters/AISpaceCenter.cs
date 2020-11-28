@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using GameOff2020.Entities.Services;
 using GameOff2020.Entities.Spies;
 using Godot;
@@ -30,7 +31,7 @@ namespace GameOff2020.Entities.SpaceCenters
 
         private void TryToExposePlayerSpy()
         {
-            var playerSpies = SpawnService.PlayerSpies;
+            var playerSpies = SpawnService.PlayerSpies.Where(spy => !string.Equals(spy.Word, "!!!")).ToList();
             if (playerSpies.Count == 0)
                 return;
 

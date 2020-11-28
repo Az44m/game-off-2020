@@ -1,3 +1,4 @@
+using System;
 using Godot;
 
 namespace GameOff2020.Entities.Services
@@ -38,11 +39,13 @@ namespace GameOff2020.Entities.Services
             set => setConfig("IsFirstTime", value);
         }
 
-        public int CurrentLevel
+        public int MaxAvailableLevel
         {
-            get => getConfig("CurrentLevel", 1);
-            set => setConfig("CurrentLevel", value);
+            get => getConfig("MaxAvailableLevel", 1);
+            set => setConfig("MaxAvailableLevel", value);
         }
+
+        public int CurrentLevel { get; set; }
 
         public override void _Ready()
         {
@@ -100,6 +103,15 @@ namespace GameOff2020.Entities.Services
             GetNode<Control>("/root/Main/Credits").Visible = false;
             GetNode<Control>("/root/Main/LevelSelector").Visible = false;
             _signalService.EmitSignal(nameof(SignalService.BackToMainMenu));
+        }
+
+        public void GoToNextLevel()
+        {
+            GD.Print(CurrentLevel, MaxAvailableLevel);
+            if (CurrentLevel >= MaxAvailableLevel)
+                MaxAvailableLevel = Math.Min(CurrentLevel + 1, 3);
+            CurrentLevel++;
+            StartGame();
         }
 
         public void GameOver(bool isWin)

@@ -10,12 +10,15 @@ namespace GameOff2020.Entities.SpaceCenters
         private Random _random;
         private Timer _exposureTimer;
         private Timer _spyTimer;
+        private LevelService _levelService;
+
         protected override string EnterSignalName { get; } = nameof(SignalService.PlayerSpyEntered);
 
         public override void _Ready()
         {
             base._Ready();
             _random = new Random();
+            _levelService = GetNode<LevelService>("/root/LevelService");
 
             _exposureTimer = GetNode<Timer>("ExposureTimer");
             _exposureTimer.Connect("timeout", this, nameof(TryToExposePlayerSpy));
@@ -49,19 +52,18 @@ namespace GameOff2020.Entities.SpaceCenters
 
         private float CalculateExposureChance(int length)
         {
-            // 1 - (1 - exposureChance / 100) ^ 15 = overallChange/100
             if (length <= 4)
-                return 0.0883f; // 75% overall
+                return _levelService.LevelData.AIExposureChances[0];
             if (length <= 5)
-                return 0.0452f; // 50% overall
+                return _levelService.LevelData.AIExposureChances[1];
             if (length <= 6)
-                return 0.019f; // 25% overall
+                return _levelService.LevelData.AIExposureChances[2];
             if (length <= 7)
-                return 0.007f; // 10% overall
+                return _levelService.LevelData.AIExposureChances[3];
             if (length <= 8)
-                return 0.0052f; // 7.5% overall
+                return _levelService.LevelData.AIExposureChances[4];
 
-            return 0.0034f; // 5% overall
+            return _levelService.LevelData.AIExposureChances[5];
         }
 
         protected override void OnGameStarted()

@@ -6,7 +6,8 @@ namespace GameOff2020.Entities.Spies
     public class AISpy : SpyBase
     {
         private SignalService _signalService;
-        private SpawnService _spawnService;
+
+        protected override int MovementSpeed { get; set; }
 
         public override void _Ready()
         {
@@ -16,8 +17,8 @@ namespace GameOff2020.Entities.Spies
             Word = WordService.GetRandomAISpyWord();
             GlobalPosition = new Vector2(1550, 850);
 
-            _spawnService = GetNode<SpawnService>("/root/SpawnService");
-
+            var levelService = GetNode<LevelService>("/root/LevelService");
+            MovementSpeed = levelService.LevelData.AISpyMovementSpeed;
             _signalService = GetNode<SignalService>("/root/SignalService");
             _signalService.Connect(nameof(SignalService.AISpyWordFound), this, nameof(OnAISpyWordFound));
         }

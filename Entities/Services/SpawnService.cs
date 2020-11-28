@@ -11,7 +11,9 @@ namespace GameOff2020.Entities.Services
 
         private readonly List<SpyBase> _aiSpies = new List<SpyBase>();
         private readonly List<SpyBase> _playerSpies = new List<SpyBase>();
+
         public IReadOnlyList<SpyBase> PlayerSpies => _playerSpies;
+        public IReadOnlyList<SpyBase> AISpies => _aiSpies;
 
         public override void _Ready()
         {

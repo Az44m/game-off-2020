@@ -5,9 +5,11 @@ namespace GameOff2020.Entities.Spies
 {
     public abstract class SpyBase : Area2D
     {
-        private int _movementSpeed = 34;
         private Label _wordLabel;
         private SpawnService _spawnService;
+
+        protected WordService WordService;
+        protected Vector2 Velocity;
 
         private string _word;
 
@@ -22,9 +24,7 @@ namespace GameOff2020.Entities.Spies
             }
         }
 
-        protected WordService WordService;
-
-        protected Vector2 Velocity;
+        protected abstract int MovementSpeed { get; set; }
 
         public override void _Ready()
         {
@@ -44,7 +44,7 @@ namespace GameOff2020.Entities.Spies
 
         public override void _PhysicsProcess(float delta)
         {
-            Velocity = Velocity.Normalized() * _movementSpeed;
+            Velocity = Velocity.Normalized() * MovementSpeed;
             Position += Velocity * delta;
         }
 
@@ -53,7 +53,7 @@ namespace GameOff2020.Entities.Spies
             Word = "!!!";
             var sprite = GetNode<AnimatedSprite>("AnimatedSprite");
             sprite.FlipH = !sprite.FlipH;
-            _movementSpeed *= 5;
+            MovementSpeed = 170;
             sprite.Play("runaway");
             ZIndex = 2;
             Velocity.x *= -1;

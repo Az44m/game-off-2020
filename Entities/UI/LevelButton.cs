@@ -13,13 +13,14 @@ namespace GameOff2020.Entities.UI
         {
             base._Ready();
             _gameStateService = GetNode<GameStateService>("/root/GameStateService");
-            Disabled = Level == 0 || Level > _gameStateService.CurrentLevel;
+            Disabled = Level == 0 || Level > _gameStateService.MaxAvailableLevel;
         }
 
         protected override void OnPressed()
         {
             GetNode<Control>("/root/Main/LevelSelector").Visible = false;
             _gameStateService.StartGame();
+            _gameStateService.CurrentLevel = Level;
         }
     }
 }

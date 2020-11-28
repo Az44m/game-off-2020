@@ -10,6 +10,8 @@ namespace GameOff2020.Entities.Services
 {
     public class WordService : Node
     {
+        private LevelService _levelService;
+        private SpawnService _spawnService;
         private Assembly _executingAssembly;
         private char[] _currentLetters;
         private readonly Random _random = new Random();
@@ -33,6 +35,8 @@ namespace GameOff2020.Entities.Services
         {
             _executingAssembly = Assembly.GetExecutingAssembly();
             LoadWords();
+            _levelService = GetNode<LevelService>("/root/LevelService");
+            _spawnService = GetNode<SpawnService>("/root/SpawnService");
         }
 
         private void LoadWords()
@@ -52,8 +56,11 @@ namespace GameOff2020.Entities.Services
 
         public bool IsValidWord(string word) => _words.Contains(word.ToUpper()) && word.All(_currentLetters.Contains);
 
-        public char[] GetRandomLetters(int amount)
+        public char[] GetRandomLetters(int amount, bool fullRandom = false)
         {
+            if (fullRandom)
+                return _letters.Keys.OrderBy(x => _random.Next()).Take(amount).ToArray();
+
             var consonants = _consonants.Keys.OrderBy(x => _random.Next()).Take(amount - 5).ToArray();
             _currentLetters = consonants.Concat(_vowels.Keys).OrderBy(x => _random.Next()).ToArray();
             return _currentLetters;
@@ -70,8 +77,14 @@ namespace GameOff2020.Entities.Services
             "ARMSTRONG", "KENNEDY", "ARTEMIS", "MOONBEAM"
         };
 
-        public string GetRandomAISpyWord() => _aiSpyWords[_random.Next(0, _aiSpyWords.Length)];
+        public string GetRandomAISpyWord()
+        {
+            if (_random.NextDouble() < _levelService.LevelData.AISpyRandomWordChance)
+                return new string(GetRandomLetters(_random.Next(4, 8), true));
 
-        public bool IsValidAISpyWord(string word) => _aiSpyWords.Contains(word.ToUpper());
+            return _aiSpyWords[_random.Next(0, _aiSpyWords.Length)];
+        }
+
+        public bool IsValidAISpyWord(string word) => _spawnService.AISpies.Any(spy => string.Equals(spy.Word, word));
     }
 }

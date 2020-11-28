@@ -16,11 +16,7 @@ namespace GameOff2020.Entities.UI
             signalService.Connect(nameof(SignalService.GameStarted), this, nameof(OnGameStarted));
         }
 
-        protected override void OnPressed()
-        {
-            _gameStateService.ShowCredits();
-            GetNode<Control>("/root/Main/Credits").Visible = true;
-        }
+        protected override void OnPressed() => _gameStateService.ShowCredits();
 
         private void OnGameStarted() => Visible = false;
     }

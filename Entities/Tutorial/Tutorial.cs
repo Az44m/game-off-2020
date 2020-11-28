@@ -138,7 +138,7 @@ namespace GameOff2020.Entities.Tutorial
                     break;
                 case TutorialState.TutorialEnd:
                     _gameStateService.IsFirstTime = false;
-                    _gameStateService.StartGame();
+                    _gameStateService.ShowLevelSelector();
                     QueueFree();
                     break;
             }

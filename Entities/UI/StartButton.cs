@@ -14,6 +14,8 @@ namespace GameOff2020.Entities.UI
             base._Ready();
             _gameStateService = GetNode<GameStateService>("/root/GameStateService");
             _tutorial = GetNode<Tutorial.Tutorial>("/root/Main/Tutorial");
+            var signalService = GetNode<SignalService>("/root/SignalService");
+            signalService.Connect(nameof(SignalService.BackToMainMenu), this, nameof(OnBackToMainMenu));
         }
 
         protected override void OnPressed()
@@ -24,8 +26,10 @@ namespace GameOff2020.Entities.UI
             }
             else
             {
-                _tutorial?.QueueFree();
-                _gameStateService.StartGame();
+                if (IsInstanceValid(_tutorial))
+                    _tutorial.QueueFree();
+
+                _gameStateService.ShowLevelSelector();
             }
 
             Visible = false;
@@ -33,12 +37,21 @@ namespace GameOff2020.Entities.UI
 
         public override void _Input(InputEvent @event)
         {
-            if (@event is InputEventKey eventKey && eventKey.Pressed && eventKey.Scancode == (int) KeyList.Escape)
+            if (_gameStateService.GameState != GameState.Started
+                && _gameStateService.GameState != GameState.Paused
+                && @event is InputEventKey eventKey
+                && eventKey.Pressed && eventKey.Scancode == (int) KeyList.Escape)
             {
-                _tutorial.Visible = false;
+                if (IsInstanceValid(_tutorial))
+                {
+                    _tutorial.Visible = false;
+                    _tutorial.TutorialState = TutorialState.Prologue;
+                }
+
                 Visible = true;
-                _tutorial.TutorialState = TutorialState.Prologue;
             }
         }
+
+        private void OnBackToMainMenu() => Visible = true;
     }
 }

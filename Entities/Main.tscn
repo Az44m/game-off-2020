@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Entities/Game.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Entities/UI/StartButton.cs" type="Script" id=2]
@@ -13,18 +13,10 @@
 [ext_resource path="res://Entities/UI/MusicCheckButton.cs" type="Script" id=11]
 [ext_resource path="res://Entities/Tutorial/Tutorial.tscn" type="PackedScene" id=12]
 [ext_resource path="res://Entities/UI/CreditsButton.cs" type="Script" id=13]
-[ext_resource path="res://Entities/UI/CreditsBack.cs" type="Script" id=14]
+[ext_resource path="res://Entities/UI/BackToMainButton.cs" type="Script" id=14]
+[ext_resource path="res://Entities/UI/LevelButton.cs" type="Script" id=16]
 
 [node name="Main" type="Node"]
-
-[node name="Background" type="ColorRect" parent="."]
-anchor_right = 1.0
-anchor_bottom = 1.0
-color = Color( 0, 0, 0, 1 )
-__meta__ = {
-"_edit_use_anchors_": false,
-"_editor_description_": ""
-}
 
 [node name="Game" parent="." instance=ExtResource( 1 )]
 
@@ -89,6 +81,7 @@ text = "Start"
 script = ExtResource( 2 )
 
 [node name="ResumeButton" type="Button" parent="UI/Menu"]
+pause_mode = 2
 visible = false
 margin_top = 37.0
 margin_right = 180.0
@@ -248,3 +241,69 @@ script = ExtResource( 14 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="LevelSelector" type="Control" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Background" type="ColorRect" parent="LevelSelector"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LevelSelectorContainer" type="VBoxContainer" parent="LevelSelector"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -90.0
+margin_top = -58.0
+margin_right = 90.0
+margin_bottom = 58.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LevelButton1" type="Button" parent="LevelSelector/LevelSelectorContainer"]
+margin_right = 180.0
+margin_bottom = 26.0
+custom_fonts/font = ExtResource( 7 )
+disabled = true
+text = "Level 1"
+script = ExtResource( 16 )
+Level = 1
+
+[node name="LevelButton2" type="Button" parent="LevelSelector/LevelSelectorContainer"]
+margin_top = 30.0
+margin_right = 180.0
+margin_bottom = 56.0
+custom_fonts/font = ExtResource( 7 )
+disabled = true
+text = "Level 2"
+script = ExtResource( 16 )
+Level = 2
+
+[node name="LevelButton3" type="Button" parent="LevelSelector/LevelSelectorContainer"]
+margin_top = 60.0
+margin_right = 180.0
+margin_bottom = 86.0
+custom_fonts/font = ExtResource( 7 )
+disabled = true
+text = "Level 3"
+script = ExtResource( 16 )
+Level = 3
+
+[node name="LevelSelectorBack" type="Button" parent="LevelSelector/LevelSelectorContainer"]
+margin_top = 90.0
+margin_right = 180.0
+margin_bottom = 116.0
+custom_fonts/font = ExtResource( 7 )
+text = "Back"
+script = ExtResource( 14 )

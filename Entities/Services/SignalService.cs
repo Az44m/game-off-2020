@@ -37,5 +37,8 @@ namespace GameOff2020.Entities.Services
 
         [Signal]
         public delegate void MusicSettingChanged(bool isEnabled);
+
+        [Signal]
+        public delegate void BackToMainMenu();
     }
 }

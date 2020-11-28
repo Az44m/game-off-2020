@@ -8,6 +8,7 @@ namespace GameOff2020.Entities.Services
         Started,
         Paused,
         Credits,
+        LevelSelector,
         GameOver
     }
 
@@ -21,20 +22,26 @@ namespace GameOff2020.Entities.Services
 
         public bool IsMusicOn
         {
-            get => getConfig("IsMusicOn");
+            get => getConfig("IsMusicOn", true);
             set => setConfig("IsMusicOn", value);
         }
 
         public bool IsSoundOn
         {
-            get => getConfig("IsSoundOn");
+            get => getConfig("IsSoundOn", true);
             set => setConfig("IsSoundOn", value);
         }
 
         public bool IsFirstTime
         {
-            get => getConfig("IsFirstTime");
+            get => getConfig("IsFirstTime", true);
             set => setConfig("IsFirstTime", value);
+        }
+
+        public int CurrentLevel
+        {
+            get => getConfig("CurrentLevel", 1);
+            set => setConfig("CurrentLevel", value);
         }
 
         public override void _Ready()
@@ -51,7 +58,10 @@ namespace GameOff2020.Entities.Services
 
         public override void _Input(InputEvent @event)
         {
-            if (@event is InputEventKey eventKey && eventKey.Pressed && eventKey.Scancode == (int) KeyList.Escape)
+            if ((GameState == GameState.Started || GameState == GameState.Paused)
+                && @event is InputEventKey eventKey
+                && eventKey.Pressed
+                && eventKey.Scancode == (int) KeyList.Escape)
                 PauseGame();
         }
 
@@ -72,9 +82,25 @@ namespace GameOff2020.Entities.Services
             _signalService.EmitSignal(nameof(SignalService.GamePaused), GameState == GameState.Paused);
         }
 
-        public void ShowCredits() => GameState = GameState.Credits;
+        public void ShowCredits()
+        {
+            GameState = GameState.Credits;
+            GetNode<Control>("/root/Main/Credits").Visible = true;
+        }
 
-        public void BackToMainMenu() => GameState = GameState.UnStarted;
+        public void ShowLevelSelector()
+        {
+            GameState = GameState.LevelSelector;
+            GetNode<Control>("/root/Main/LevelSelector").Visible = true;
+        }
+
+        public void BackToMainMenu()
+        {
+            GameState = GameState.UnStarted;
+            GetNode<Control>("/root/Main/Credits").Visible = false;
+            GetNode<Control>("/root/Main/LevelSelector").Visible = false;
+            _signalService.EmitSignal(nameof(SignalService.BackToMainMenu));
+        }
 
         public void GameOver(bool isWin)
         {
@@ -83,18 +109,18 @@ namespace GameOff2020.Entities.Services
             _signalService.EmitSignal(nameof(SignalService.GameOver), isWin);
         }
 
-        private bool getConfig(string configName)
+        private T getConfig<T>(string configName, T defaultValue)
         {
             var gameData = new ConfigFile();
             gameData.Load(GameDataPath);
-            return (bool) gameData.GetValue("section", configName, true);
+            return (T) gameData.GetValue("section", configName, defaultValue);
         }
 
-        private void setConfig(string configName, bool isEnabled)
+        private void setConfig<T>(string configName, T value)
         {
             var gameData = new ConfigFile();
             gameData.Load(GameDataPath);
-            gameData.SetValue("section", configName, isEnabled);
+            gameData.SetValue("section", configName, value);
             gameData.Save(GameDataPath);
         }
     }

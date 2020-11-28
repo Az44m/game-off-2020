@@ -31,15 +31,14 @@ namespace GameOff2020.Entities.SpaceCenters
 
         protected virtual void OnGamePaused(bool isPaused)
         {
-            var zIndex = isPaused ? 0 : 1;
-            _animatedDoor.ZIndex = zIndex;
-            SpyContainer.ZIndex = zIndex;
+            _animatedDoor.ZIndex = isPaused ? 0 : 2;
+            SpyContainer.ZIndex = isPaused ? 0 : 1;
         }
 
         protected virtual void OnGameStarted()
         {
             _animatedDoor.Visible = true;
-            _animatedDoor.ZIndex = 1;
+            _animatedDoor.ZIndex = 2;
             _staticDoor.Visible = true;
             SpyContainer.ZIndex = 1;
         }

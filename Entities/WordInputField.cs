@@ -34,7 +34,7 @@ namespace GameOff2020.Entities
             _regex.Compile(@"^[a-zA-Z]*$");
 
             _signalService.Connect(nameof(SignalService.GameStarted), this, nameof(OnGameStarted));
-            _signalService.Connect(nameof(SignalService.GameOver), this, nameof(OnGameOver));
+            _signalService.Connect(nameof(SignalService.LevelOver), this, nameof(OnLevelOver));
             _signalService.Connect(nameof(SignalService.GamePaused), this, nameof(OnGamePaused));
         }
 
@@ -110,7 +110,7 @@ namespace GameOff2020.Entities
         }
 
         // ReSharper disable once UnusedParameter.Local
-        private void OnGameOver(bool isWin)
+        private void OnLevelOver(bool isWin)
         {
             _correctWordAudioPlayer.Stop();
             _wrongWordAudioPlayer.Stop();

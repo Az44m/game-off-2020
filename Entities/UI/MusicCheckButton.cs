@@ -15,7 +15,7 @@ namespace GameOff2020.Entities.UI
             Pressed = _gameStateService.IsMusicOn;
             OnToggled(Pressed);
             Connect("toggled", this, nameof(OnToggled));
-            _signalService.Connect(nameof(SignalService.GameOver), this, nameof(OnGameOver));
+            _signalService.Connect(nameof(SignalService.LevelOver), this, nameof(OnLevelOver));
             _signalService.Connect(nameof(SignalService.GamePaused), this, nameof(OnGamePaused));
         }
 
@@ -25,7 +25,7 @@ namespace GameOff2020.Entities.UI
             _signalService.EmitSignal(nameof(SignalService.MusicSettingChanged), isPressed);
         }
         // ReSharper disable once UnusedParameter.Local
-        private void OnGameOver(bool isWin) => Visible = false;
+        private void OnLevelOver(bool isWin) => Visible = false;
         private void OnGamePaused(bool isPaused) => Visible = isPaused;
     }
 }

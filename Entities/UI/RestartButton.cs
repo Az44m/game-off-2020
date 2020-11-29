@@ -13,7 +13,7 @@ namespace GameOff2020.Entities.UI
 
             _gameStateService = GetNode<GameStateService>("/root/GameStateService");
             var signalService = GetNode<SignalService>("/root/SignalService");
-            signalService.Connect(nameof(SignalService.GameOver), this, nameof(OnGameOver));
+            signalService.Connect(nameof(SignalService.LevelOver), this, nameof(OnLevelOver));
             signalService.Connect(nameof(SignalService.GamePaused), this, nameof(OnGamePaused));
         }
 
@@ -24,7 +24,7 @@ namespace GameOff2020.Entities.UI
         }
 
         // ReSharper disable once UnusedParameter.Local
-        private void OnGameOver(bool isWin) => Visible = true;
+        private void OnLevelOver(bool isWin) => Visible = true;
         private void OnGamePaused(bool isPaused) => Visible = isPaused;
     }
 }

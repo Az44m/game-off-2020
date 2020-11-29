@@ -25,7 +25,7 @@ namespace GameOff2020.Entities.SpaceCenters
             SpawnService = GetNode<SpawnService>("/root/SpawnService");
             _animatedDoor.Connect("animation_finished", this, nameof(OnDoorAnimationFinished));
             SignalService.Connect(nameof(SignalService.GameStarted), this, nameof(OnGameStarted));
-            SignalService.Connect(nameof(SignalService.GameOver), this, nameof(OnGameOver));
+            SignalService.Connect(nameof(SignalService.LevelOver), this, nameof(OnLevelOver));
             SignalService.Connect(nameof(SignalService.GamePaused), this, nameof(OnGamePaused));
         }
 
@@ -70,7 +70,7 @@ namespace GameOff2020.Entities.SpaceCenters
         }
 
         // ReSharper disable once UnusedParameter.Local
-        private void OnGameOver(bool isWin)
+        private void OnLevelOver(bool isWin)
         {
             _animatedDoor.ZIndex = 0;
             SpyContainer.ZIndex = 0;

@@ -13,7 +13,7 @@ namespace GameOff2020.Entities.UI
             _gameStateService = GetNode<GameStateService>("/root/GameStateService");
 
             var signalService = GetNode<SignalService>("/root/SignalService");
-            signalService.Connect(nameof(SignalService.GameOver), this, nameof(OnGameOver));
+            signalService.Connect(nameof(SignalService.LevelOver), this, nameof(OnLevelOver));
         }
 
         protected override void OnPressed()
@@ -22,6 +22,6 @@ namespace GameOff2020.Entities.UI
             Visible = false;
         }
 
-        private void OnGameOver(bool isWin) => Visible = isWin && _gameStateService.MaxAvailableLevel < 3;
+        private void OnLevelOver(bool isWin) => Visible = isWin && _gameStateService.MaxAvailableLevel < 3;
     }
 }

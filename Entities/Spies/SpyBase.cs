@@ -36,7 +36,7 @@ namespace GameOff2020.Entities.Spies
 
             var signalService = GetNode<SignalService>("/root/SignalService");
             signalService.Connect(nameof(SignalService.GamePaused), this, nameof(OnGamePaused));
-            signalService.Connect(nameof(SignalService.GameOver), this, nameof(OnGameOver));
+            signalService.Connect(nameof(SignalService.LevelOver), this, nameof(OnLevelOver));
 
             var visibilityNotifier = GetNode<VisibilityNotifier2D>("VisibilityNotifier2D");
             visibilityNotifier.Connect("screen_exited", this, nameof(OnScreenExited));
@@ -66,7 +66,7 @@ namespace GameOff2020.Entities.Spies
         }
 
         // ReSharper disable once UnusedParameter.Local
-        private void OnGameOver(bool isWin) => ZIndex = 0;
+        private void OnLevelOver(bool isWin) => ZIndex = 0;
 
         private void OnScreenExited() => _spawnService.Destroy(this);
     }

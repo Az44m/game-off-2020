@@ -29,7 +29,7 @@ namespace GameOff2020.Entities.ObjectiveProgressBars
         }
 
         protected abstract string ResourcePrefix { get; }
-        protected abstract bool GameOverState { get; }
+        protected abstract bool LevelOverState { get; }
 
         public override void _Ready()
         {
@@ -42,7 +42,7 @@ namespace GameOff2020.Entities.ObjectiveProgressBars
             SpySabotageAudioPlayer = GetNode<AudioStreamPlayer2D>("SpySabotageAudioPlayer");
 
             SignalService.Connect(nameof(SignalService.GameStarted), this, nameof(OnGameStarted));
-            SignalService.Connect(nameof(SignalService.GameOver), this, nameof(OnGameOver));
+            SignalService.Connect(nameof(SignalService.LevelOver), this, nameof(OnLevelOver));
             LoadRocketTextures();
         }
 
@@ -50,7 +50,7 @@ namespace GameOff2020.Entities.ObjectiveProgressBars
         {
             Value++;
             if (Value >= 100)
-                GameStateService.GameOver(GameOverState);
+                GameStateService.LevelOver(LevelOverState);
         }
 
         protected virtual void OnGameStarted()
@@ -102,6 +102,6 @@ namespace GameOff2020.Entities.ObjectiveProgressBars
         }
 
         // ReSharper disable once UnusedParameter.Local
-        private void OnGameOver(bool isWin) => SpySabotageAudioPlayer.Stop();
+        private void OnLevelOver(bool isWin) => SpySabotageAudioPlayer.Stop();
     }
 }

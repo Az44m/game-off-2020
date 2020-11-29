@@ -15,13 +15,13 @@ namespace GameOff2020.Entities.UI
             Connect("toggled", this, nameof(OnToggled));
 
             var signalService = GetNode<SignalService>("/root/SignalService");
-            signalService.Connect(nameof(SignalService.GameOver), this, nameof(OnGameOver));
+            signalService.Connect(nameof(SignalService.LevelOver), this, nameof(OnLevelOver));
             signalService.Connect(nameof(SignalService.GamePaused), this, nameof(OnGamePaused));
         }
 
         private void OnToggled(bool isPressed) => _gameStateService.IsSoundOn = isPressed;
         // ReSharper disable once UnusedParameter.Local
-        private void OnGameOver(bool isWin) => Visible = false;
+        private void OnLevelOver(bool isWin) => Visible = false;
         private void OnGamePaused(bool isPaused) => Visible = isPaused;
     }
 }

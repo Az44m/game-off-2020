@@ -17,7 +17,7 @@ namespace GameOff2020.Entities.Guards
 
             _exposedSpyAudioPlayer = GetNode<AudioStreamPlayer2D>("ExposedSpyAudioPlayer");
 
-            SignalService.Connect(nameof(SignalService.GameOver), this, nameof(OnGameOver));
+            SignalService.Connect(nameof(SignalService.LevelOver), this, nameof(OnLevelOver));
         }
 
         protected async void OnSpyExposed(SpyBase spy)
@@ -35,6 +35,6 @@ namespace GameOff2020.Entities.Guards
         }
 
         // ReSharper disable once UnusedParameter.Local
-        private void OnGameOver(bool isWin) => _exposedSpyAudioPlayer.Stop();
+        private void OnLevelOver(bool isWin) => _exposedSpyAudioPlayer.Stop();
     }
 }

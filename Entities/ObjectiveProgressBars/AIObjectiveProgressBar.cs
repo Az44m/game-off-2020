@@ -6,7 +6,7 @@ namespace GameOff2020.Entities.ObjectiveProgressBars
     {
         private WordService _wordService;
         protected override string ResourcePrefix => "AI";
-        protected override bool GameOverState => false;
+        protected override bool LevelOverState => false;
 
         public override void _Ready()
         {

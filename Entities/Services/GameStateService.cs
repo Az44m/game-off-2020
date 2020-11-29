@@ -10,7 +10,7 @@ namespace GameOff2020.Entities.Services
         Paused,
         Credits,
         LevelSelector,
-        GameOver
+        LevelOver
     }
 
     public class GameStateService : Node
@@ -114,11 +114,11 @@ namespace GameOff2020.Entities.Services
             StartGame();
         }
 
-        public void GameOver(bool isWin)
+        public void LevelOver(bool isWin)
         {
-            GameState = GameState.GameOver;
+            GameState = GameState.LevelOver;
             GetTree().Paused = true;
-            _signalService.EmitSignal(nameof(SignalService.GameOver), isWin);
+            _signalService.EmitSignal(nameof(SignalService.LevelOver), isWin);
         }
 
         private T getConfig<T>(string configName, T defaultValue)

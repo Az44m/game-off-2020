@@ -22,6 +22,12 @@ namespace GameOff2020.Entities.UI
             Visible = false;
         }
 
-        private void OnLevelOver(bool isWin) => Visible = isWin && _gameStateService.MaxAvailableLevel < 3;
+        private void OnLevelOver(bool isWin)
+        {
+            if (_gameStateService.CurrentLevel == 3)
+                Text = "Continue";
+
+            Visible = isWin;
+        }
     }
 }

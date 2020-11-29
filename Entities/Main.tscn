@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Entities/Game.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Entities/UI/StartButton.cs" type="Script" id=2]
@@ -16,6 +16,7 @@
 [ext_resource path="res://Entities/UI/BackToMainButton.cs" type="Script" id=14]
 [ext_resource path="res://Entities/UI/NextLevelButton.cs" type="Script" id=15]
 [ext_resource path="res://Entities/UI/LevelButton.cs" type="Script" id=16]
+[ext_resource path="res://Entities/UI/GameOverScene.cs" type="Script" id=17]
 
 [node name="Main" type="Node"]
 
@@ -75,9 +76,8 @@ __meta__ = {
 }
 
 [node name="StartButton" type="Button" parent="UI/Menu"]
-margin_top = 15.0
 margin_right = 180.0
-margin_bottom = 41.0
+margin_bottom = 26.0
 custom_fonts/font = ExtResource( 7 )
 text = "Start"
 script = ExtResource( 2 )
@@ -111,18 +111,18 @@ text = "Next level"
 script = ExtResource( 15 )
 
 [node name="MusicCheckButton" type="CheckButton" parent="UI/Menu"]
-margin_top = 45.0
+margin_top = 30.0
 margin_right = 180.0
-margin_bottom = 85.0
+margin_bottom = 70.0
 pressed = true
 text = "Music"
 align = 1
 script = ExtResource( 11 )
 
 [node name="SoundCheckButton" type="CheckButton" parent="UI/Menu"]
-margin_top = 89.0
+margin_top = 74.0
 margin_right = 180.0
-margin_bottom = 129.0
+margin_bottom = 114.0
 shortcut_in_tooltip = false
 pressed = true
 text = "Sound"
@@ -130,17 +130,17 @@ align = 1
 script = ExtResource( 10 )
 
 [node name="Credits" type="Button" parent="UI/Menu"]
-margin_top = 133.0
+margin_top = 118.0
 margin_right = 180.0
-margin_bottom = 159.0
+margin_bottom = 144.0
 custom_fonts/font = ExtResource( 7 )
 text = "Credits"
 script = ExtResource( 13 )
 
 [node name="QuitButton" type="Button" parent="UI/Menu"]
-margin_top = 163.0
+margin_top = 148.0
 margin_right = 180.0
-margin_bottom = 189.0
+margin_bottom = 174.0
 custom_fonts/font = ExtResource( 7 )
 text = "Quit"
 script = ExtResource( 6 )
@@ -318,3 +318,141 @@ margin_bottom = 116.0
 custom_fonts/font = ExtResource( 7 )
 text = "Back"
 script = ExtResource( 14 )
+
+[node name="GameOverScene" type="Control" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 17 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Background" type="ColorRect" parent="GameOverScene"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0, 0, 0, 1 )
+
+[node name="GameOverDialogContainer" type="Control" parent="GameOverScene"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GameOverDialog" type="Label" parent="GameOverScene/GameOverDialogContainer"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -425.0
+margin_top = -152.0
+margin_right = 425.0
+margin_bottom = -86.0
+custom_fonts/font = ExtResource( 7 )
+text = "Your country reached the moon first. And with that, you proved better in three major aspects of space exploration. Although the other country closely following you, they could not achieve what you did."
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": ""
+}
+
+[node name="PeaceButton" type="Button" parent="GameOverScene/GameOverDialogContainer"]
+pause_mode = 2
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -425.0
+margin_top = -56.0
+margin_right = 425.0
+margin_bottom = -30.0
+rect_pivot_offset = Vector2( 570.5, 13 )
+custom_fonts/font = ExtResource( 7 )
+text = "I'm tired of the conflict and hate that we spy on each other. We could achieve more together."
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="WarButton" type="Button" parent="GameOverScene/GameOverDialogContainer"]
+pause_mode = 2
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -425.0
+margin_top = -13.0
+margin_right = 425.0
+margin_bottom = 13.0
+rect_pivot_offset = Vector2( 570.5, 13 )
+custom_fonts/font = ExtResource( 7 )
+text = "I won't share the space with any other country! Let those spies come, I will expose them all!"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PeaceOutComeLabel" type="Label" parent="GameOverScene"]
+visible = false
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -406.5
+margin_top = 298.0
+margin_right = 406.5
+margin_bottom = 387.0
+custom_fonts/font = ExtResource( 7 )
+text = "After reaching the Moon, your country decided to stop the competition and initiate a collaboration. The other country accepted it and the cooperation started. With the joined forces, the two countries were able to construct a permanently crewed Earth-orbiting space station. They are now exploring space together, with greater success than ever before..."
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": ""
+}
+
+[node name="ThankYouLabel" type="Label" parent="GameOverScene"]
+visible = false
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -98.0
+margin_top = 140.0
+margin_right = 100.0
+margin_bottom = 160.0
+custom_fonts/font = ExtResource( 7 )
+text = "Thank you for playing!"
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": ""
+}
+
+[node name="WarOutComeLabel" type="Label" parent="GameOverScene"]
+visible = false
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -425.0
+margin_top = 298.0
+margin_right = 425.0
+margin_bottom = 479.0
+custom_fonts/font = ExtResource( 7 )
+text = "After becoming the most powerful space nation, your country's primary focus is shifted to an even more ambitious goal: to construct a permanently crewed Earth-orbiting space station.
+The other countries are constantly trying to sabotage your space program and stole information from you. The conflict is intensified. They don't want you to own the space. If this situation continues, it could lead to war..."
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false,
+"_editor_description_": ""
+}
+
+[node name="QuitButton" type="Button" parent="GameOverScene"]
+pause_mode = 2
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -46.0
+margin_top = 37.0
+margin_right = 47.0
+margin_bottom = 63.0
+rect_pivot_offset = Vector2( 570.5, 13 )
+custom_fonts/font = ExtResource( 7 )
+text = "Quit"
+__meta__ = {
+"_edit_use_anchors_": false
+}

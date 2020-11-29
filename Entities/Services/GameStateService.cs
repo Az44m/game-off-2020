@@ -10,7 +10,8 @@ namespace GameOff2020.Entities.Services
         Paused,
         Credits,
         LevelSelector,
-        LevelOver
+        LevelOver,
+        GameOver
     }
 
     public class GameStateService : Node
@@ -102,16 +103,8 @@ namespace GameOff2020.Entities.Services
             GameState = GameState.UnStarted;
             GetNode<Control>("/root/Main/Credits").Visible = false;
             GetNode<Control>("/root/Main/LevelSelector").Visible = false;
+            GetNode<Control>("/root/Main/GameOverScene").Visible = false;
             _signalService.EmitSignal(nameof(SignalService.BackToMainMenu));
-        }
-
-        public void GoToNextLevel()
-        {
-            GD.Print(CurrentLevel, MaxAvailableLevel);
-            if (CurrentLevel >= MaxAvailableLevel)
-                MaxAvailableLevel = Math.Min(CurrentLevel + 1, 3);
-            CurrentLevel++;
-            StartGame();
         }
 
         public void LevelOver(bool isWin)
@@ -119,6 +112,28 @@ namespace GameOff2020.Entities.Services
             GameState = GameState.LevelOver;
             GetTree().Paused = true;
             _signalService.EmitSignal(nameof(SignalService.LevelOver), isWin);
+        }
+
+        public void GoToNextLevel()
+        {
+            if (CurrentLevel == 3)
+            {
+                ShowGameOverScene();
+            }
+            else
+            {
+                if (CurrentLevel >= MaxAvailableLevel)
+                    MaxAvailableLevel = Math.Min(CurrentLevel + 1, 3);
+
+                CurrentLevel++;
+                StartGame();
+            }
+        }
+
+        private void ShowGameOverScene()
+        {
+            GameState = GameState.GameOver;
+            GetNode<Control>("/root/Main/GameOverScene").Visible = true;
         }
 
         private T getConfig<T>(string configName, T defaultValue)
